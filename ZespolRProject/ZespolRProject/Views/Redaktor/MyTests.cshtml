@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ZespolRProject.Models.Test>
+@{
+    ViewBag.Title = "CreateTest";
+}
+<style>
+    body {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-light-4837.png");
+        background-color: #cccccc;
+    }
+    /*background: rgba(150, 68, 207, 0.44) url(C:\Users\Влад\Desktop\1.jpg); /* Цвет фона и путь к файлу */ */
+    /*color: #fff; /* Цвет текста */
+</style>
+
+<style>
+    .jumbotron {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.jpg");
+    }
+</style>
+
+<div class="jumbotron">
+
+    <div class="container">
+        <div class="col-md-4">
+            <h4>Username</h4>
+            <h4>Status-Redactor</h4>
+        </div>
+        <div class="col-md-offset-5">
+            <h3>Test search</h3>
+        </div>
+
+
+    </div>
+
+    <h1> </h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="Test name ">
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="jumbotron">
+
+    <div class="col-md-4">
+        <p><a href="~/Redaktor/CreateTest" class="btn btn-primary btn-lg btn-block">Create Test </a></p>
+    </div>
+
+    <div class="col-md-4">
+        <p><a href="~/Redaktor/MyTests" class="btn btn-primary btn-lg btn-block">My Tests</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <p><a href="~/Redaktor/TestScore" class="btn btn-primary btn-lg btn-block">Test Scores</a></p>
+    </div>
+    <h1> </h1>
+
+</div>
+
+
+
+<body>
+
+    <div class="container">
+        <div class="col-md-4">
+            <div class="list-group">
+                @foreach (var item in Model)
+                {
+
+                    <div id="section1">
+                        <a href="#" class="list-group-item">
+                            @Html.DisplayFor(modelItem => item.t_name)
+
+
+                        </a>
+
+
+     
+                    </div>
+                }
+
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="list-group">
+                @foreach (var item in Model)
+                {
+
+                    <div id="section1">
+                        <a href="#" class="list-group-item">
+                            @Html.DisplayFor(modelItem => item.t_desc)
+
+
+                        </a>
+
+
+
+
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="col-md-4">
+                <p><a href="http://asp.net" class="btn btn-success btn-sm  ">view</a></p>
+
+            </div>
+                <div class="col-md-4">
+                    <p><a href="http://asp.net" class="btn btn-success btn-sm  ">deletet</a></p>
+
+                </div>
+
+                    <div class="col-md-4">
+                        <p><a href="http://asp.net" class="btn btn-success btn-sm  ">edit</a></p>
+                    </div>
+                    </div>
+
+
+        </div>
+</body>
+
+<h3>   </h3>
+<p>                  </p>

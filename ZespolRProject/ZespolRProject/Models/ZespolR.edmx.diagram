@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9edfe16fa33430a89a8a21c3c20f591" Name="Diagram1">
+        <EntityTypeShape EntityType="ZespolRModel.Answer" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Candidate" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Editor" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Language" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Moderator" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Position" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Question" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.QuestionType" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.Test" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.TestTake" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.TestTakeStatus" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.TestVersion" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZespolRModel.tt_a_assoc" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="ZespolRModel.FK_Answer_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_tt_a_assoc_Answer" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Candidate_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_TestTake_Candidate" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Editor_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Editor_Moderator" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Test_Editor" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Test_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_TestVersion_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Test_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_Question_QuestionType" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_TestVersion_Test" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_TestTake_TestTake" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_TestTake_TestVersion" ManuallyRouted="false" />
+        <AssociationConnector Association="ZespolRModel.FK_tt_a_assoc_TestTake" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
