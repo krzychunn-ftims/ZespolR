@@ -14,16 +14,9 @@ namespace ZespolRProject.Models
     
     public partial class QuestionType
     {
-        public QuestionType()
-        {
-            this.Question = new HashSet<Question>();
-        }
-    
         public int qt_id { get; set; }
         public string qt_name { get; set; }
         public Nullable<bool> qt_is_answer_def { get; set; }
         public Nullable<bool> qt_is_multiselect { get; set; }
-    
-        public virtual ICollection<Question> Question { get; set; }
     }
 }

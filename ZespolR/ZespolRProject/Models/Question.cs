@@ -14,11 +14,6 @@ namespace ZespolRProject.Models
     
     public partial class Question
     {
-        public Question()
-        {
-            this.Answer = new HashSet<Answer>();
-        }
-    
         public int q_id { get; set; }
         public string q_head { get; set; }
         public string q_body { get; set; }
@@ -26,8 +21,5 @@ namespace ZespolRProject.Models
         public Nullable<bool> q_is_neg { get; set; }
         public Nullable<decimal> q_max_score { get; set; }
         public Nullable<int> q_tv { get; set; }
-    
-        public virtual ICollection<Answer> Answer { get; set; }
-        public virtual QuestionType QuestionType { get; set; }
     }
 }

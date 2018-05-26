@@ -20,8 +20,5 @@ namespace ZespolRProject.Models
         public Nullable<long> ca_phone { get; set; }
         public Nullable<int> ca_def_lng { get; set; }
         public string ca_password { get; set; }
-    
-        public virtual Language Language { get; set; }
-        public virtual TestTake TestTake { get; set; }
     }
 }

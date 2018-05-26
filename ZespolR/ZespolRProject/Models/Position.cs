@@ -14,15 +14,8 @@ namespace ZespolRProject.Models
     
     public partial class Position
     {
-        public Position()
-        {
-            this.Test = new HashSet<Test>();
-        }
-    
         public int po_id { get; set; }
         public string po_name { get; set; }
         public string po_desc { get; set; }
-    
-        public virtual ICollection<Test> Test { get; set; }
     }
 }

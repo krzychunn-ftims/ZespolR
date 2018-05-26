@@ -18,8 +18,5 @@ namespace ZespolRProject.Models
         public Nullable<int> C_tt { get; set; }
         public Nullable<int> C_a { get; set; }
         public Nullable<System.DateTime> C_time { get; set; }
-    
-        public virtual Answer Answer { get; set; }
-        public virtual TestTake TestTake { get; set; }
     }
 }

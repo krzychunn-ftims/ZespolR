@@ -14,21 +14,11 @@ namespace ZespolRProject.Models
     
     public partial class TestTake
     {
-        public TestTake()
-        {
-            this.tt_a_assoc = new HashSet<tt_a_assoc>();
-        }
-    
         public int tt_id { get; set; }
         public Nullable<int> tt_tv { get; set; }
         public Nullable<int> tt_ca { get; set; }
         public Nullable<System.DateTime> tt_start { get; set; }
         public Nullable<System.DateTime> tt_end { get; set; }
         public Nullable<int> tt_status { get; set; }
-    
-        public virtual Candidate Candidate { get; set; }
-        public virtual TestTakeStatus TestTakeStatus { get; set; }
-        public virtual TestVersion TestVersion { get; set; }
-        public virtual ICollection<tt_a_assoc> tt_a_assoc { get; set; }
     }
 }

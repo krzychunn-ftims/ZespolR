@@ -14,18 +14,10 @@ namespace ZespolRProject.Models
     
     public partial class Answer
     {
-        public Answer()
-        {
-            this.tt_a_assoc = new HashSet<tt_a_assoc>();
-        }
-    
         public int a_id { get; set; }
         public Nullable<int> a_q { get; set; }
         public string a_body { get; set; }
         public Nullable<decimal> a_score { get; set; }
         public Nullable<bool> a_is_user { get; set; }
-    
-        public virtual Question Question { get; set; }
-        public virtual ICollection<tt_a_assoc> tt_a_assoc { get; set; }
     }
 }

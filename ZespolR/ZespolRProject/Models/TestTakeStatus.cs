@@ -14,15 +14,8 @@ namespace ZespolRProject.Models
     
     public partial class TestTakeStatus
     {
-        public TestTakeStatus()
-        {
-            this.TestTake = new HashSet<TestTake>();
-        }
-    
         public int tts_id { get; set; }
         public string tts_name { get; set; }
         public string tts_closed { get; set; }
-    
-        public virtual ICollection<TestTake> TestTake { get; set; }
     }
 }

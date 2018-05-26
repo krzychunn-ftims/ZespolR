@@ -14,17 +14,10 @@ namespace ZespolRProject.Models
     
     public partial class Moderator
     {
-        public Moderator()
-        {
-            this.Editor = new HashSet<Editor>();
-        }
-    
         public int mod_id { get; set; }
         public string mod_name { get; set; }
         public string mod_surnae { get; set; }
         public string mod_phone { get; set; }
         public string mod_password { get; set; }
-    
-        public virtual ICollection<Editor> Editor { get; set; }
     }
 }

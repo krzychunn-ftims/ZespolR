@@ -14,11 +14,6 @@ namespace ZespolRProject.Models
     
     public partial class Editor
     {
-        public Editor()
-        {
-            this.Test = new HashSet<Test>();
-        }
-    
         public int ed_id { get; set; }
         public string ed_name { get; set; }
         public string ed_surname { get; set; }
@@ -26,9 +21,5 @@ namespace ZespolRProject.Models
         public Nullable<int> ed_def_lng { get; set; }
         public string ed_password { get; set; }
         public Nullable<int> ed_mod { get; set; }
-    
-        public virtual Language Language { get; set; }
-        public virtual Moderator Moderator { get; set; }
-        public virtual ICollection<Test> Test { get; set; }
     }
 }

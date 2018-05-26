@@ -164,46 +164,61 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Candidate.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Editor.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Language.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Moderator.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Position.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Question.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuestionType.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Test.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TestTake.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TestTakeStatus.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TestVersion.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tt_a_assoc.cs">
-      <DependentUpon>ZespolR.tt</DependentUpon>
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ZespolR.Context.cs">
       <AutoGen>True</AutoGen>
@@ -229,6 +244,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\WebModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebModel.edmx</DependentUpon>
+      <LastGenOutput>WebModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WebModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebModel.edmx</DependentUpon>
+      <LastGenOutput>WebModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ZespolR.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ZespolR.edmx</DependentUpon>
@@ -252,6 +277,13 @@
     </EntityDeploy>
     <Content Include="Models\ZespolR.edmx.diagram">
       <DependentUpon>ZespolR.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\WebModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WebModel.edmx.diagram">
+      <DependentUpon>WebModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
