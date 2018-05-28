@@ -19,6 +19,12 @@
         <EntityTypeShape EntityType="zespolrModel.TestTakeStatus" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zespolrModel.TestVersion" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zespolrModel.tt_a_assoc" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="zespolrModel.FK_Answer_Question" />
+        <AssociationConnector Association="zespolrModel.FK_Editor_Moderator" />
+        <AssociationConnector Association="zespolrModel.FK_Test_Editor" />
+        <AssociationConnector Association="zespolrModel.FK_Question_QuestionType" />
+        <AssociationConnector Association="zespolrModel.FK_Question_TestVersion" />
+        <AssociationConnector Association="zespolrModel.FK_TestVersion_Test" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

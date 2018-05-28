@@ -14,6 +14,11 @@ namespace ZespolRProject.Models
     
     public partial class Test
     {
+        public Test()
+        {
+            this.TestVersion = new HashSet<TestVersion>();
+        }
+    
         public int t_id { get; set; }
         public string t_name { get; set; }
         public string t_desc { get; set; }
@@ -26,5 +31,8 @@ namespace ZespolRProject.Models
         public Nullable<int> t_tt_limit { get; set; }
         public Nullable<decimal> t_pass_limit { get; set; }
         public Nullable<System.TimeSpan> t_time_limit { get; set; }
+    
+        public virtual Editor Editor { get; set; }
+        public virtual ICollection<TestVersion> TestVersion { get; set; }
     }
 }

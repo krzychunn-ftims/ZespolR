@@ -14,9 +14,17 @@ namespace ZespolRProject.Models
     
     public partial class TestVersion
     {
+        public TestVersion()
+        {
+            this.Question = new HashSet<Question>();
+        }
+    
         public int tv_id { get; set; }
         public Nullable<int> tv_t { get; set; }
         public Nullable<int> tv_lng { get; set; }
         public Nullable<bool> tv_is_published { get; set; }
+    
+        public virtual ICollection<Question> Question { get; set; }
+        public virtual Test Test { get; set; }
     }
 }

@@ -90,38 +90,35 @@
         <div class="col-md-4">
 
             <div class="list-group">
+
                 @foreach (var item in Model)
                 {
-
                     <div id="section1">
                         <a href="#" class="list-group-item">
                             @Html.DisplayFor(modelItem => item.t_desc)
-
-
                         </a>
-
-
-
-
                     </div>
                 }
+
             </div>
         </div>
-
+@foreach (var item in Model)
+{
         <div class="col-md-4">
             <div class="col-md-4">
-                <p><a href="http://asp.net" class="btn btn-success btn-sm  ">view</a></p>
-
+                @Html.ActionLink("View", "ViewTest", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
             </div>
-                <div class="col-md-4">
-                    <p><a href="http://asp.net" class="btn btn-success btn-sm  ">deletet</a></p>
 
+
+                <div class="col-md-4">
+                    @Html.ActionLink("delete","ActionName", "ControllerName", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
                 </div>
 
                     <div class="col-md-4">
                         <p><a href="http://asp.net" class="btn btn-success btn-sm  ">edit</a></p>
                     </div>
-                    </div>
+       </div>
+}
 
 
         </div>

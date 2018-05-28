@@ -20,5 +20,10 @@ namespace ZespolRProject.Controllers
             return View(t);
 
         }
+
+        public ActionResult Requests()
+        {
+            return View();
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace ZespolRProject.Models
         public string a_body { get; set; }
         public Nullable<decimal> a_score { get; set; }
         public Nullable<bool> a_is_user { get; set; }
+    
+        public virtual Question Question { get; set; }
     }
 }
