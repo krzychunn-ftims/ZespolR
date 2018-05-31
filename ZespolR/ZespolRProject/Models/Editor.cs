@@ -26,6 +26,7 @@ namespace ZespolRProject.Models
         public Nullable<int> ed_def_lng { get; set; }
         public string ed_password { get; set; }
         public Nullable<int> ed_mod { get; set; }
+        public Nullable<bool> ed_isActive { get; set; }
     
         public virtual Moderator Moderator { get; set; }
         public virtual ICollection<Test> Test { get; set; }

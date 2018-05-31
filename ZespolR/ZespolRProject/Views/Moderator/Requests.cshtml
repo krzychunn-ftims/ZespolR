@@ -94,10 +94,26 @@
         <div class="row">
             <nav class="col-sm-3" id="myScrollspy">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#section1">Request 1</a></li>
-                    <li><a href="#section2">Request 2</a></li>
-                    <li><a href="#section3">Request 3</a></li>
-                </ul>
+                    @*<li class="active"><a href="#section1">Request 1</a></li>
+        <li><a href="#section2">Request 2</a></li>
+        <li><a href="#section3">Request 3</a></li>*@
+                    @foreach (var item in Model)
+                    {
+                        string t = "Request" + @Html.DisplayFor(modelItem => item.ed_surname);
+                    <li> @Html.ActionLink(t, "Requests", new { id = item.ed_id })      </li>
+
+                @*<li>
+                    Html.ActionLink(Request @Html.DisplayFor(modelItem => item.ed_surname), "Details", new { id = item.ed_id })
+                </li>*@
+                    }
+</ul>
+
+
+
+
+
+
+
 
                 <div class="col-sm-12">
                     <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="write for quick search">
@@ -116,18 +132,12 @@
                 }*@
                 <div id="section2">
                     <h1>Request 2</h1>
-                    <p>Fullname:</p>
+                    <p> @Html.DisplayFor(model => model.ed_name)</p>
                     <p>Email:</p>
                     <p>Post:</p>
                     <p>Date:</p>
                 </div>
-                <div id="section3">
-                    <h1>Request 3</h1>
-                    <p>Fullname:</p>
-                    <p>Email:</p>
-                    <p>Post:</p>
-                    <p>Date:</p>
-                </div>
+
             </div>
         </div>
     </div>

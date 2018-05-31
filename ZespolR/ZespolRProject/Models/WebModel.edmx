@@ -39,6 +39,7 @@ warning 6002: The table/view 'zespolr.dbo.Candidate' does not have a primary key
           <Property Name="ed_def_lng" Type="int" />
           <Property Name="ed_password" Type="varchar" MaxLength="50" />
           <Property Name="ed_mod" Type="int" />
+          <Property Name="ed_isActive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'zespolr.dbo.Language' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -367,6 +368,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="ed_mod" Type="Int32" />
           <NavigationProperty Name="Moderator" Relationship="zespolrModel.FK_Editor_Moderator" FromRole="Editor" ToRole="Moderator" />
           <NavigationProperty Name="Test" Relationship="zespolrModel.FK_Test_Editor" FromRole="Editor" ToRole="Test" />
+          <Property Name="ed_isActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -635,6 +637,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <EntitySetMapping Name="Editor">
             <EntityTypeMapping TypeName="zespolrModel.Editor">
               <MappingFragment StoreEntitySet="Editor">
+                <ScalarProperty Name="ed_isActive" ColumnName="ed_isActive" />
                 <ScalarProperty Name="ed_id" ColumnName="ed_id" />
                 <ScalarProperty Name="ed_name" ColumnName="ed_name" />
                 <ScalarProperty Name="ed_surname" ColumnName="ed_surname" />

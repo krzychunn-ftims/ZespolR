@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ZespolRProject.Models;
@@ -23,7 +24,34 @@ namespace ZespolRProject.Controllers
 
         public ActionResult Requests()
         {
-            return View();
+
+            var a = db.Editor.Where(x => x.ed_isActive == null).ToList();
+            return View(db.Editor.Where(x => x.ed_isActive == null).ToList());
         }
+
+        public ActionResult details(int? id)
+        {
+
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Editor editor = db.Editor.Find(id);
+                if (editor == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(editor);
+            }
+        }
+
+        public ActionResult t1()
+        {
+            return View(db.Editor.Where(x => x.ed_isActive == null).ToList());
+
+        }
+
     }
 }
