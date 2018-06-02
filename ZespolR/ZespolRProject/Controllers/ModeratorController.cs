@@ -15,10 +15,27 @@ namespace ZespolRProject.Controllers
         // GET: Moderator
         public ActionResult Index()
         {
-            var i = int.Parse(System.Web.HttpContext.Current.User.Identity.Name);
-            var t = db.Editor.Where(e => e.ed_mod == i).ToList();
 
-            return View(t);
+            List<Test> list = db.Test.ToList();
+            List<Editor> list2 = db.Editor.ToList();
+
+            TestsCollection a = new TestsCollection();
+            EditorsCollection b = new EditorsCollection();
+
+            Editor_Test c = new Editor_Test();
+
+            foreach (Test item in list)
+            {
+                c.Tests.Models.Add(item);
+            }
+
+            c.Editors.Models = new List<Editor>();
+            foreach (Editor item in list2)
+            {
+                c.Editors.Models.Add(item);
+            }
+
+            return View(c);
 
         }
 

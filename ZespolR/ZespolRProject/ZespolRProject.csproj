@@ -226,21 +226,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WebModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ZespolR.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZespolR.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ZespolR.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZespolR.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ZespolR.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZespolR.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -260,29 +245,12 @@
       <DependentUpon>WebModel.edmx</DependentUpon>
       <LastGenOutput>WebModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ZespolR.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZespolR.edmx</DependentUpon>
-      <LastGenOutput>ZespolR.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ZespolR.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZespolR.edmx</DependentUpon>
-      <LastGenOutput>ZespolR.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\ZespolR.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ZespolR.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ZespolR.edmx.diagram">
-      <DependentUpon>ZespolR.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\WebModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

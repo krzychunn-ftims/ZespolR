@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="zespolrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="zespolrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="a_id" />
@@ -329,7 +329,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             <End Role="TestVersion" EntitySet="TestVersion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zespolrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -337,12 +338,95 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Key>
             <PropertyRef Name="a_id" />
           </Key>
-          <Property Name="a_id" Type="Int32" Nullable="false" />
+          <Property Name="a_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="a_q" Type="Int32" />
           <Property Name="a_body" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="a_score" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="a_is_user" Type="Boolean" />
-          <NavigationProperty Name="Question" Relationship="zespolrModel.FK_Answer_Question" FromRole="Answer" ToRole="Question" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Answer_Question" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Editor">
+          <Key>
+            <PropertyRef Name="ed_id" />
+          </Key>
+          <Property Name="ed_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ed_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ed_surname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ed_phone" Type="Int32" />
+          <Property Name="ed_def_lng" Type="Int32" />
+          <Property Name="ed_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ed_mod" Type="Int32" />
+          <Property Name="ed_isActive" Type="Boolean" />
+          <NavigationProperty Name="Moderator" Relationship="Self.FK_Editor_Moderator" FromRole="Editor" ToRole="Moderator" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_Test_Editor" FromRole="Editor" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Moderator">
+          <Key>
+            <PropertyRef Name="mod_id" />
+          </Key>
+          <Property Name="mod_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mod_surnae" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mod_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mod_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Editor" Relationship="Self.FK_Editor_Moderator" FromRole="Moderator" ToRole="Editor" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="q_id" />
+          </Key>
+          <Property Name="q_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="q_head" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="q_body" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="q_qt" Type="Int32" />
+          <Property Name="q_is_neg" Type="Boolean" />
+          <Property Name="q_max_score" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="q_tv" Type="Int32" />
+          <Property Name="q_answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="q_comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK_Answer_Question" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="QuestionType" Relationship="Self.FK_Question_QuestionType" FromRole="Question" ToRole="QuestionType" />
+          <NavigationProperty Name="TestVersion" Relationship="Self.FK_Question_TestVersion" FromRole="Question" ToRole="TestVersion" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="qt_id" />
+          </Key>
+          <Property Name="qt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="qt_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="qt_is_answer_def" Type="Boolean" />
+          <Property Name="qt_is_multiselect" Type="Boolean" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Question_QuestionType" FromRole="QuestionType" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="t_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="t_po" Type="Int32" />
+          <Property Name="t_def_lng" Type="Int32" />
+          <Property Name="t_ed" Type="Int32" />
+          <Property Name="t_start" Type="DateTime" Precision="3" />
+          <Property Name="t_end" Type="DateTime" Precision="3" />
+          <Property Name="t_is_published" Type="Boolean" />
+          <Property Name="t_tt_limit" Type="Int32" />
+          <Property Name="t_pass_limit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="t_time_limit" Type="Time" Precision="7" />
+          <NavigationProperty Name="Editor" Relationship="Self.FK_Test_Editor" FromRole="Test" ToRole="Editor" />
+          <NavigationProperty Name="TestVersion" Relationship="Self.FK_TestVersion_Test" FromRole="Test" ToRole="TestVersion" />
+        </EntityType>
+        <EntityType Name="TestVersion">
+          <Key>
+            <PropertyRef Name="tv_id" />
+          </Key>
+          <Property Name="tv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tv_t" Type="Int32" />
+          <Property Name="tv_lng" Type="Int32" />
+          <Property Name="tv_is_published" Type="Boolean" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Question_TestVersion" FromRole="TestVersion" ToRole="Question" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_TestVersion_Test" FromRole="TestVersion" ToRole="Test" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -355,38 +439,12 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="ca_def_lng" Type="Int32" />
           <Property Name="ca_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Editor">
-          <Key>
-            <PropertyRef Name="ed_id" />
-          </Key>
-          <Property Name="ed_id" Type="Int32" Nullable="false" />
-          <Property Name="ed_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ed_surname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ed_phone" Type="Int32" />
-          <Property Name="ed_def_lng" Type="Int32" />
-          <Property Name="ed_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ed_mod" Type="Int32" />
-          <NavigationProperty Name="Moderator" Relationship="zespolrModel.FK_Editor_Moderator" FromRole="Editor" ToRole="Moderator" />
-          <NavigationProperty Name="Test" Relationship="zespolrModel.FK_Test_Editor" FromRole="Editor" ToRole="Test" />
-          <Property Name="ed_isActive" Type="Boolean" />
-        </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="lng_id" />
           </Key>
           <Property Name="lng_id" Type="Int32" Nullable="false" />
           <Property Name="lng_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Moderator">
-          <Key>
-            <PropertyRef Name="mod_id" />
-          </Key>
-          <Property Name="mod_id" Type="Int32" Nullable="false" />
-          <Property Name="mod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="mod_surnae" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="mod_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="mod_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Editor" Relationship="zespolrModel.FK_Editor_Moderator" FromRole="Moderator" ToRole="Editor" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -395,33 +453,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="po_id" Type="Int32" Nullable="false" />
           <Property Name="po_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="po_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Question">
-          <Key>
-            <PropertyRef Name="q_id" />
-          </Key>
-          <Property Name="q_id" Type="Int32" Nullable="false" />
-          <Property Name="q_head" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="q_body" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="q_qt" Type="Int32" />
-          <Property Name="q_is_neg" Type="Boolean" />
-          <Property Name="q_max_score" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="q_tv" Type="Int32" />
-          <NavigationProperty Name="Answer" Relationship="zespolrModel.FK_Answer_Question" FromRole="Question" ToRole="Answer" />
-          <NavigationProperty Name="QuestionType" Relationship="zespolrModel.FK_Question_QuestionType" FromRole="Question" ToRole="QuestionType" />
-          <NavigationProperty Name="TestVersion" Relationship="zespolrModel.FK_Question_TestVersion" FromRole="Question" ToRole="TestVersion" />
-          <Property Name="q_answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="q_comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="QuestionType">
-          <Key>
-            <PropertyRef Name="qt_id" />
-          </Key>
-          <Property Name="qt_id" Type="Int32" Nullable="false" />
-          <Property Name="qt_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="qt_is_answer_def" Type="Boolean" />
-          <Property Name="qt_is_multiselect" Type="Boolean" />
-          <NavigationProperty Name="Question" Relationship="zespolrModel.FK_Question_QuestionType" FromRole="QuestionType" ToRole="Question" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -434,25 +465,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="diagram_id" Type="Int32" Nullable="false" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Test">
-          <Key>
-            <PropertyRef Name="t_id" />
-          </Key>
-          <Property Name="t_id" Type="Int32" Nullable="false" />
-          <Property Name="t_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="t_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="t_po" Type="Int32" />
-          <Property Name="t_def_lng" Type="Int32" />
-          <Property Name="t_ed" Type="Int32" />
-          <Property Name="t_start" Type="DateTime" Precision="3" />
-          <Property Name="t_end" Type="DateTime" Precision="3" />
-          <Property Name="t_is_published" Type="Boolean" />
-          <Property Name="t_tt_limit" Type="Int32" />
-          <Property Name="t_pass_limit" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="t_time_limit" Type="Time" Precision="7" />
-          <NavigationProperty Name="Editor" Relationship="zespolrModel.FK_Test_Editor" FromRole="Test" ToRole="Editor" />
-          <NavigationProperty Name="TestVersion" Relationship="zespolrModel.FK_TestVersion_Test" FromRole="Test" ToRole="TestVersion" />
         </EntityType>
         <EntityType Name="TestTake">
           <Key>
@@ -473,17 +485,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="tts_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tts_closed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="TestVersion">
-          <Key>
-            <PropertyRef Name="tv_id" />
-          </Key>
-          <Property Name="tv_id" Type="Int32" Nullable="false" />
-          <Property Name="tv_t" Type="Int32" />
-          <Property Name="tv_lng" Type="Int32" />
-          <Property Name="tv_is_published" Type="Boolean" />
-          <NavigationProperty Name="Question" Relationship="zespolrModel.FK_Question_TestVersion" FromRole="TestVersion" ToRole="Question" />
-          <NavigationProperty Name="Test" Relationship="zespolrModel.FK_TestVersion_Test" FromRole="TestVersion" ToRole="Test" />
-        </EntityType>
         <EntityType Name="tt_a_assoc">
           <Key>
             <PropertyRef Name="ID" />
@@ -493,49 +494,9 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="C_a" Type="Int32" />
           <Property Name="C_time" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="zespolrEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Answer" EntityType="Self.Answer" />
-          <EntitySet Name="Candidate" EntityType="Self.Candidate" />
-          <EntitySet Name="Editor" EntityType="Self.Editor" />
-          <EntitySet Name="Language" EntityType="Self.Language" />
-          <EntitySet Name="Moderator" EntityType="Self.Moderator" />
-          <EntitySet Name="Position" EntityType="Self.Position" />
-          <EntitySet Name="Question" EntityType="Self.Question" />
-          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Test" EntityType="Self.Test" />
-          <EntitySet Name="TestTake" EntityType="Self.TestTake" />
-          <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" />
-          <EntitySet Name="TestVersion" EntityType="Self.TestVersion" />
-          <EntitySet Name="tt_a_assoc" EntityType="Self.tt_a_assoc" />
-          <AssociationSet Name="FK_Answer_Question" Association="zespolrModel.FK_Answer_Question">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="Answer" EntitySet="Answer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Editor_Moderator" Association="zespolrModel.FK_Editor_Moderator">
-            <End Role="Moderator" EntitySet="Moderator" />
-            <End Role="Editor" EntitySet="Editor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Test_Editor" Association="zespolrModel.FK_Test_Editor">
-            <End Role="Editor" EntitySet="Editor" />
-            <End Role="Test" EntitySet="Test" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Question_QuestionType" Association="zespolrModel.FK_Question_QuestionType">
-            <End Role="QuestionType" EntitySet="QuestionType" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Question_TestVersion" Association="zespolrModel.FK_Question_TestVersion">
-            <End Role="TestVersion" EntitySet="TestVersion" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestVersion_Test" Association="zespolrModel.FK_TestVersion_Test">
-            <End Role="Test" EntitySet="Test" />
-            <End Role="TestVersion" EntitySet="TestVersion" />
-          </AssociationSet>
-        </EntityContainer>
         <Association Name="FK_Answer_Question">
-          <End Type="zespolrModel.Question" Role="Question" Multiplicity="0..1" />
-          <End Type="zespolrModel.Answer" Role="Answer" Multiplicity="*" />
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Question">
               <PropertyRef Name="q_id" />
@@ -546,8 +507,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Editor_Moderator">
-          <End Type="zespolrModel.Moderator" Role="Moderator" Multiplicity="0..1" />
-          <End Type="zespolrModel.Editor" Role="Editor" Multiplicity="*" />
+          <End Role="Moderator" Type="Self.Moderator" Multiplicity="0..1" />
+          <End Role="Editor" Type="Self.Editor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Moderator">
               <PropertyRef Name="mod_id" />
@@ -558,8 +519,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Test_Editor">
-          <End Type="zespolrModel.Editor" Role="Editor" Multiplicity="0..1" />
-          <End Type="zespolrModel.Test" Role="Test" Multiplicity="*" />
+          <End Role="Editor" Type="Self.Editor" Multiplicity="0..1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Editor">
               <PropertyRef Name="ed_id" />
@@ -570,8 +531,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Question_QuestionType">
-          <End Type="zespolrModel.QuestionType" Role="QuestionType" Multiplicity="0..1" />
-          <End Type="zespolrModel.Question" Role="Question" Multiplicity="*" />
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuestionType">
               <PropertyRef Name="qt_id" />
@@ -582,8 +543,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Question_TestVersion">
-          <End Type="zespolrModel.TestVersion" Role="TestVersion" Multiplicity="0..1" />
-          <End Type="zespolrModel.Question" Role="Question" Multiplicity="*" />
+          <End Role="TestVersion" Type="Self.TestVersion" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TestVersion">
               <PropertyRef Name="tv_id" />
@@ -594,8 +555,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TestVersion_Test">
-          <End Type="zespolrModel.Test" Role="Test" Multiplicity="0..1" />
-          <End Type="zespolrModel.TestVersion" Role="TestVersion" Multiplicity="*" />
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="TestVersion" Type="Self.TestVersion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Test">
               <PropertyRef Name="t_id" />
@@ -605,12 +566,52 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="zespolrEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answer" EntityType="Self.Answer" />
+          <EntitySet Name="Editor" EntityType="Self.Editor" />
+          <EntitySet Name="Moderator" EntityType="Self.Moderator" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="TestVersion" EntityType="Self.TestVersion" />
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" />
+          <EntitySet Name="Language" EntityType="Self.Language" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TestTake" EntityType="Self.TestTake" />
+          <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" />
+          <EntitySet Name="tt_a_assoc" EntityType="Self.tt_a_assoc" />
+          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Editor_Moderator" Association="Self.FK_Editor_Moderator">
+            <End Role="Moderator" EntitySet="Moderator" />
+            <End Role="Editor" EntitySet="Editor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Editor" Association="Self.FK_Test_Editor">
+            <End Role="Editor" EntitySet="Editor" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_QuestionType" Association="Self.FK_Question_QuestionType">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_TestVersion" Association="Self.FK_Question_TestVersion">
+            <End Role="TestVersion" EntitySet="TestVersion" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestVersion_Test" Association="Self.FK_TestVersion_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="TestVersion" EntitySet="TestVersion" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="zespolrModelStoreContainer" CdmEntityContainer="zespolrEntities2">
+        <EntityContainerMapping StorageEntityContainer="zespolrModelStoreContainer" CdmEntityContainer="zespolrEntities">
           <EntitySetMapping Name="Answer">
             <EntityTypeMapping TypeName="zespolrModel.Answer">
               <MappingFragment StoreEntitySet="Answer">
@@ -622,22 +623,9 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Candidate">
-            <EntityTypeMapping TypeName="zespolrModel.Candidate">
-              <MappingFragment StoreEntitySet="Candidate">
-                <ScalarProperty Name="ca_id" ColumnName="ca_id" />
-                <ScalarProperty Name="ca_name" ColumnName="ca_name" />
-                <ScalarProperty Name="ca_surname" ColumnName="ca_surname" />
-                <ScalarProperty Name="ca_phone" ColumnName="ca_phone" />
-                <ScalarProperty Name="ca_def_lng" ColumnName="ca_def_lng" />
-                <ScalarProperty Name="ca_password" ColumnName="ca_password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Editor">
             <EntityTypeMapping TypeName="zespolrModel.Editor">
               <MappingFragment StoreEntitySet="Editor">
-                <ScalarProperty Name="ed_isActive" ColumnName="ed_isActive" />
                 <ScalarProperty Name="ed_id" ColumnName="ed_id" />
                 <ScalarProperty Name="ed_name" ColumnName="ed_name" />
                 <ScalarProperty Name="ed_surname" ColumnName="ed_surname" />
@@ -645,14 +633,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
                 <ScalarProperty Name="ed_def_lng" ColumnName="ed_def_lng" />
                 <ScalarProperty Name="ed_password" ColumnName="ed_password" />
                 <ScalarProperty Name="ed_mod" ColumnName="ed_mod" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Language">
-            <EntityTypeMapping TypeName="zespolrModel.Language">
-              <MappingFragment StoreEntitySet="Language">
-                <ScalarProperty Name="lng_id" ColumnName="lng_id" />
-                <ScalarProperty Name="lng_name" ColumnName="lng_name" />
+                <ScalarProperty Name="ed_isActive" ColumnName="ed_isActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -667,20 +648,9 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Position">
-            <EntityTypeMapping TypeName="zespolrModel.Position">
-              <MappingFragment StoreEntitySet="Position">
-                <ScalarProperty Name="po_id" ColumnName="po_id" />
-                <ScalarProperty Name="po_name" ColumnName="po_name" />
-                <ScalarProperty Name="po_desc" ColumnName="po_desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Question">
             <EntityTypeMapping TypeName="zespolrModel.Question">
               <MappingFragment StoreEntitySet="Question">
-                <ScalarProperty Name="q_comment" ColumnName="q_comment" />
-                <ScalarProperty Name="q_answer" ColumnName="q_answer" />
                 <ScalarProperty Name="q_id" ColumnName="q_id" />
                 <ScalarProperty Name="q_head" ColumnName="q_head" />
                 <ScalarProperty Name="q_body" ColumnName="q_body" />
@@ -688,6 +658,8 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
                 <ScalarProperty Name="q_is_neg" ColumnName="q_is_neg" />
                 <ScalarProperty Name="q_max_score" ColumnName="q_max_score" />
                 <ScalarProperty Name="q_tv" ColumnName="q_tv" />
+                <ScalarProperty Name="q_answer" ColumnName="q_answer" />
+                <ScalarProperty Name="q_comment" ColumnName="q_comment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -698,17 +670,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
                 <ScalarProperty Name="qt_name" ColumnName="qt_name" />
                 <ScalarProperty Name="qt_is_answer_def" ColumnName="qt_is_answer_def" />
                 <ScalarProperty Name="qt_is_multiselect" ColumnName="qt_is_multiselect" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="zespolrModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -730,6 +691,56 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TestVersion">
+            <EntityTypeMapping TypeName="zespolrModel.TestVersion">
+              <MappingFragment StoreEntitySet="TestVersion">
+                <ScalarProperty Name="tv_id" ColumnName="tv_id" />
+                <ScalarProperty Name="tv_t" ColumnName="tv_t" />
+                <ScalarProperty Name="tv_lng" ColumnName="tv_lng" />
+                <ScalarProperty Name="tv_is_published" ColumnName="tv_is_published" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidate">
+            <EntityTypeMapping TypeName="zespolrModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="ca_id" ColumnName="ca_id" />
+                <ScalarProperty Name="ca_name" ColumnName="ca_name" />
+                <ScalarProperty Name="ca_surname" ColumnName="ca_surname" />
+                <ScalarProperty Name="ca_phone" ColumnName="ca_phone" />
+                <ScalarProperty Name="ca_def_lng" ColumnName="ca_def_lng" />
+                <ScalarProperty Name="ca_password" ColumnName="ca_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Language">
+            <EntityTypeMapping TypeName="zespolrModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="lng_id" ColumnName="lng_id" />
+                <ScalarProperty Name="lng_name" ColumnName="lng_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="zespolrModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="po_id" ColumnName="po_id" />
+                <ScalarProperty Name="po_name" ColumnName="po_name" />
+                <ScalarProperty Name="po_desc" ColumnName="po_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="zespolrModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TestTake">
             <EntityTypeMapping TypeName="zespolrModel.TestTake">
               <MappingFragment StoreEntitySet="TestTake">
@@ -748,16 +759,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
                 <ScalarProperty Name="tts_id" ColumnName="tts_id" />
                 <ScalarProperty Name="tts_name" ColumnName="tts_name" />
                 <ScalarProperty Name="tts_closed" ColumnName="tts_closed" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestVersion">
-            <EntityTypeMapping TypeName="zespolrModel.TestVersion">
-              <MappingFragment StoreEntitySet="TestVersion">
-                <ScalarProperty Name="tv_id" ColumnName="tv_id" />
-                <ScalarProperty Name="tv_t" ColumnName="tv_t" />
-                <ScalarProperty Name="tv_lng" ColumnName="tv_lng" />
-                <ScalarProperty Name="tv_is_published" ColumnName="tv_is_published" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

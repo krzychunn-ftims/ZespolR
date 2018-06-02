@@ -13,10 +13,10 @@ namespace ZespolRProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class zespolrEntities2 : DbContext
+    public partial class ZespolREntities : DbContext
     {
-        public zespolrEntities2()
-            : base("name=zespolrEntities2")
+        public ZespolREntities()
+            : base("name=zespolrEntities")
         {
         }
     
@@ -26,18 +26,18 @@ namespace ZespolRProject.Models
         }
     
         public DbSet<Answer> Answer { get; set; }
-        public DbSet<Candidate> Candidate { get; set; }
         public DbSet<Editor> Editor { get; set; }
-        public DbSet<Language> Language { get; set; }
         public DbSet<Moderator> Moderator { get; set; }
-        public DbSet<Position> Position { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionType> QuestionType { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Test> Test { get; set; }
+        public DbSet<TestVersion> TestVersion { get; set; }
+        public DbSet<Candidate> Candidate { get; set; }
+        public DbSet<Language> Language { get; set; }
+        public DbSet<Position> Position { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<TestTake> TestTake { get; set; }
         public DbSet<TestTakeStatus> TestTakeStatus { get; set; }
-        public DbSet<TestVersion> TestVersion { get; set; }
         public DbSet<tt_a_assoc> tt_a_assoc { get; set; }
     }
 }
