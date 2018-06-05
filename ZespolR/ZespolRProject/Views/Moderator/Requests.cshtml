@@ -99,7 +99,7 @@
         <li><a href="#section3">Request 3</a></li>*@
                     @foreach (var item in Model)
                     {
-                        string t = "Request" + @Html.DisplayFor(modelItem => item.ed_surname);
+                        string t = "Request " + @Html.DisplayFor(modelItem => item.ed_surname);
                     <li> @Html.ActionLink(t, "Requests", new { id = item.ed_id })      </li>
 
                 @*<li>
@@ -108,13 +108,6 @@
                     }
 </ul>
 
-
-
-
-
-
-
-
                 <div class="col-sm-12">
                     <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="write for quick search">
 
@@ -122,16 +115,54 @@
             </nav>
             <div class="col-sm-9">
 
-                @*@foreach (var item in Model)
-                {
+                <table class="table" style='table-layout:fixed;'>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.ed_name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.ed_surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.ed_isActive)
+                        </th>
+                    </tr>
 
-                    <div id="section1">
-                        <h1>@Html.DisplayFor(modelItem => item.ed_name)</h1>
-                        <p>@Html.DisplayFor(modelItem => item.ed_surname)</p>
-                    </div>
-                }*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ed_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ed_surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ed_isActive)
+                            </td>
+                        </tr>
+                    }
+                </table>
 
-            </div>
+
+
+
+                    @*@foreach (var item in Model)
+                    {
+
+                        <div id="section1">
+                    <h1>@Html.DisplayFor(modelItem => item.ed_name)</h1>
+                    <p>@Html.DisplayFor(modelItem => item.ed_surname)</p>
+                </div>
+
+                        <div id="section1">
+
+                            @Html.DisplayFor(modelItem => item.ed_surname) @Html.DisplayFor(modelItem => item.ed_name)
+
+                        </div>
+                    }*@
+
+</div>
         </div>
     </div>
 

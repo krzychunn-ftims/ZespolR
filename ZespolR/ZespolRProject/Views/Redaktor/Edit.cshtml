@@ -134,7 +134,6 @@
                     <th>Question</th>
                     <th>Answer</th>
                     <th>Comment</th>
-                    <th>Answer variations</th>
                 </tr>
             </thead>
 
@@ -146,11 +145,7 @@
                         <td>@Html.DisplayFor(modelItem => item.q_head)</td>
                         <td>@Html.DisplayFor(modelItem => item.q_answer)</td>
                         <td>@Html.DisplayFor(modelItem => item.q_comment)</td>
-                        <td>
-                            @Html.ActionLink("show", "Delete", "Redaktor",
-                           new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
-                        <td>
-</tr>
+                    </tr>
 
                 </tbody>
             }

@@ -49,5 +49,31 @@ namespace ZespolRProject.Controllers
             var b = db.Question.Where(x => x.q_tv == a.tv_id).ToList();
             return View(b);
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            Test test = db.Test.Find(id);
+            db.Test.Remove(test);
+            db.SaveChanges();
+            return RedirectToAction("MyTests");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Test test = db.Test.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            TestVersion a = db.TestVersion.Where(x => x.tv_t == test.t_id).First();
+            var b = db.Question.Where(x => x.q_tv == a.tv_id).ToList();
+            return View(b);
+        }
+
     }
 }

@@ -111,11 +111,11 @@
 
 
                 <div class="col-md-4">
-                    @Html.ActionLink("delete","ActionName", "ControllerName", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("delete","Delete", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
                 </div>
 
                     <div class="col-md-4">
-                        <p><a href="http://asp.net" class="btn btn-success btn-sm  ">edit</a></p>
+                        @Html.ActionLink("edit", "Edit", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
                     </div>
        </div>
 }

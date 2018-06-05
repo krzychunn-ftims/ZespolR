@@ -229,8 +229,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootsrap.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,6 +298,7 @@
     <Content Include="Views\Redaktor\ViewTest.cshtml" />
     <Content Include="Views\Moderator\t1.cshtml" />
     <Content Include="Views\Moderator\details.cshtml" />
+    <Content Include="Views\Redaktor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
