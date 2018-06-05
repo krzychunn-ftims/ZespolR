@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ZespolRProject.Models.Editor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_def_lng)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ed_isActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Moderator.mod_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_def_lng)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ed_isActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Moderator.mod_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ed_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ed_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ed_id })
+        </td>
+    </tr>
+}
+
+</table>
