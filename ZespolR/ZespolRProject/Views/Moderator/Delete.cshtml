@@ -1,0 +1,181 @@
+﻿@model ZespolRProject.Models.Editor
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+    body {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.jpg");
+        background-color: #cccccc;
+        position: relative;
+    }
+    /*background: rgba(150, 68, 207, 0.44) url(C:\Users\Влад\Desktop\1.jpg); /* Цвет фона и путь к файлу */ */
+    /*color: #fff; /* Цвет текста */
+    ul.nav-pills {
+        top: 20px;
+        position: fixed;
+    }
+
+    div.col-sm-9 div {
+        height: 250px;
+        font-size: 28px;
+    }
+
+    #section1 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+
+    #section2 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+
+    #section3 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+</style>
+
+<style>
+    .jumbotron {
+        background-image: url("https://i.imgur.com/6E0HH40.jpg");
+    }
+</style>
+
+<div class="jumbotron">
+
+    <div class="container">
+        <div class="col-md-4">
+            <h4>Username @System.Web.HttpContext.Current.User.Identity.Name</h4>
+            <h4>Status-Moderator</h4>
+        </div>
+        <div class="col-md-offset-5">
+            <h3>Test search</h3>
+        </div>
+    </div>
+    <h1> </h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="Test name ">
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="jumbotron">
+
+    <div class="col-md-6">
+        <p><a href="~/Moderator/Index" class="btn btn-primary btn-lg btn-block">Managing redactors</a></p>
+    </div>
+
+    <div class="col-md-6">
+        <p><a href="~/Moderator/Requests" class="btn btn-primary btn-lg btn-block">Redactor requests</a></p>
+    </div>
+
+    <h1> </h1>
+
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Are you sure you want to delete this redaktor?</h3>
+    </div>
+    <div class="col-sm-1">
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Yes" class="btn btn-lg btn-success" />
+        </div>
+
+}
+    </div>
+        <div class="col-sm-1">
+            <p><a href="~/Moderator/Requests" class="btn btn-lg btn-danger">No</a></p>
+        </div>
+        </div>
+    
+    <div class="row">
+        <div class="col-sm-3">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_surname)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_surname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_def_lng)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_def_lng)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-3">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_password)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_password)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ed_isActive)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ed_isActive)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Moderator.mod_name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Moderator.mod_name)
+                </dd>
+
+            </dl>
+
+        </div>
+    </div>
+    <div class="col-sm-4">
+    </div>
+
+    @*@Html.ActionLink("Back to List", "Index")*@
