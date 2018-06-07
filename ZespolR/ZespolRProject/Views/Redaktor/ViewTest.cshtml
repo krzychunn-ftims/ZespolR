@@ -147,8 +147,7 @@
                         <td>@Html.DisplayFor(modelItem => item.q_answer)</td>
                         <td>@Html.DisplayFor(modelItem => item.q_comment)</td>
                         <td>
-                            @Html.ActionLink("show", "Delete", "Redaktor",
-                           new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
+                          @Html.ActionLink("show", "DetailsAnswer", "Redaktor", new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
                         <td>
 </tr>
 

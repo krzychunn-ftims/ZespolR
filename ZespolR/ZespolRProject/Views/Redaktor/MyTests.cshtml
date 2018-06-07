@@ -70,19 +70,12 @@
             <div class="list-group">
                 @foreach (var item in Model)
                 {
-
                     <div id="section1">
                         <a href="#" class="list-group-item">
                             @Html.DisplayFor(modelItem => item.t_name)
-
-
                         </a>
-
-
-     
                     </div>
                 }
-
             </div>
         </div>
 
@@ -105,18 +98,18 @@
 @foreach (var item in Model)
 {
         <div class="col-md-4">
-            <div class="col-md-4">
-                @Html.ActionLink("View", "ViewTest", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
-            </div>
+  
+                @Html.ActionLink("show", "ViewTest", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
 
 
-                <div class="col-md-4">
+
+
                     @Html.ActionLink("delete","Delete", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
-                </div>
 
-                    <div class="col-md-4">
+
+
                         @Html.ActionLink("edit", "Edit", "Redaktor", new { id = item.t_id }, new { @class = "btn btn-success btn-sm" })
-                    </div>
+
        </div>
 }
 
