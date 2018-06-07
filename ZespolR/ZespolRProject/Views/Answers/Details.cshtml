@@ -1,0 +1,50 @@
+﻿@model ZespolRProject.Models.Answer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Answer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.a_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.a_score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.a_is_user)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_is_user)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.q_head)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.q_head)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.a_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

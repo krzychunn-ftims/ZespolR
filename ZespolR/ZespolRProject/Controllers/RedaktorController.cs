@@ -5,6 +5,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ZespolRProject.Models;
+using System.Data;
+using System.Data.Entity;
+
 
 namespace ZespolRProject.Controllers
 {
@@ -49,5 +52,40 @@ namespace ZespolRProject.Controllers
             var b = db.Question.Where(x => x.q_tv == a.tv_id).ToList();
             return View(b);
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            Test test = db.Test.Find(id);
+            db.Test.Remove(test);
+            db.SaveChanges();
+            return RedirectToAction("MyTests");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Test test = db.Test.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            TestVersion a = db.TestVersion.Where(x => x.tv_t == test.t_id).First();
+            var b = db.Question.Where(x => x.q_tv == a.tv_id).ToList();
+            return View(b);
+        }
+
+        public ActionResult DetailsAnswer(int? id)
+        {
+            var answer = db.Answer.Include(a => a.Question);
+            var b = answer.Where(x => x.a_q == id);
+            return View(b.ToList());
+        }
+
+
+
     }
 }

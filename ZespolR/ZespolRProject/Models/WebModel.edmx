@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="zespolrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="a_id" />
@@ -60,15 +60,14 @@ warning 6002: The table/view 'zespolr.dbo.Language' does not have a primary key 
           <Property Name="mod_phone" Type="varchar" MaxLength="50" />
           <Property Name="mod_password" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'zespolr.dbo.Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="po_id" />
           </Key>
-          <Property Name="po_id" Type="int" Nullable="false" />
+          <Property Name="po_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="po_name" Type="varchar" MaxLength="50" />
           <Property Name="po_desc" Type="varchar" MaxLength="50" />
+          <Property Name="po_isActive" Type="bit" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -227,6 +226,18 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Test_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="po_id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="t_po" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TestVersion_Test">
           <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
           <End Role="TestVersion" Type="Self.TestVersion" Multiplicity="*" />
@@ -239,70 +250,64 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="zespolrModelStoreContainer">
+        <EntityContainer Name="WebModelStoreContainer">
           <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Editor" EntityType="Self.Editor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestVersion" EntityType="Self.TestVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidate" EntityType="Self.Candidate" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[Candidate].[ca_id] AS [ca_id], 
-[Candidate].[ca_name] AS [ca_name], 
-[Candidate].[ca_surname] AS [ca_surname], 
-[Candidate].[ca_phone] AS [ca_phone], 
-[Candidate].[ca_def_lng] AS [ca_def_lng], 
-[Candidate].[ca_password] AS [ca_password]
-FROM [dbo].[Candidate] AS [Candidate]</DefiningQuery>
+    [Candidate].[ca_id] AS [ca_id], 
+    [Candidate].[ca_name] AS [ca_name], 
+    [Candidate].[ca_surname] AS [ca_surname], 
+    [Candidate].[ca_phone] AS [ca_phone], 
+    [Candidate].[ca_def_lng] AS [ca_def_lng], 
+    [Candidate].[ca_password] AS [ca_password]
+    FROM [dbo].[Candidate] AS [Candidate]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Language" EntityType="Self.Language" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[Language].[lng_id] AS [lng_id], 
-[Language].[lng_name] AS [lng_name]
-FROM [dbo].[Language] AS [Language]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Position" EntityType="Self.Position" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Position].[po_id] AS [po_id], 
-[Position].[po_name] AS [po_name], 
-[Position].[po_desc] AS [po_desc]
-FROM [dbo].[Position] AS [Position]</DefiningQuery>
+    [Language].[lng_id] AS [lng_id], 
+    [Language].[lng_name] AS [lng_name]
+    FROM [dbo].[Language] AS [Language]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[sysdiagrams].[name] AS [name], 
-[sysdiagrams].[principal_id] AS [principal_id], 
-[sysdiagrams].[diagram_id] AS [diagram_id], 
-[sysdiagrams].[version] AS [version], 
-[sysdiagrams].[definition] AS [definition]
-FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
+    [sysdiagrams].[name] AS [name], 
+    [sysdiagrams].[principal_id] AS [principal_id], 
+    [sysdiagrams].[diagram_id] AS [diagram_id], 
+    [sysdiagrams].[version] AS [version], 
+    [sysdiagrams].[definition] AS [definition]
+    FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TestTake" EntityType="Self.TestTake" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[TestTake].[tt_id] AS [tt_id], 
-[TestTake].[tt_tv] AS [tt_tv], 
-[TestTake].[tt_ca] AS [tt_ca], 
-[TestTake].[tt_start] AS [tt_start], 
-[TestTake].[tt_end] AS [tt_end], 
-[TestTake].[tt_status] AS [tt_status]
-FROM [dbo].[TestTake] AS [TestTake]</DefiningQuery>
+    [TestTake].[tt_id] AS [tt_id], 
+    [TestTake].[tt_tv] AS [tt_tv], 
+    [TestTake].[tt_ca] AS [tt_ca], 
+    [TestTake].[tt_start] AS [tt_start], 
+    [TestTake].[tt_end] AS [tt_end], 
+    [TestTake].[tt_status] AS [tt_status]
+    FROM [dbo].[TestTake] AS [TestTake]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[TestTakeStatus].[tts_id] AS [tts_id], 
-[TestTakeStatus].[tts_name] AS [tts_name], 
-[TestTakeStatus].[tts_closed] AS [tts_closed]
-FROM [dbo].[TestTakeStatus] AS [TestTakeStatus]</DefiningQuery>
+    [TestTakeStatus].[tts_id] AS [tts_id], 
+    [TestTakeStatus].[tts_name] AS [tts_name], 
+    [TestTakeStatus].[tts_closed] AS [tts_closed]
+    FROM [dbo].[TestTakeStatus] AS [TestTakeStatus]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tt_a_assoc" EntityType="Self.tt_a_assoc" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[tt_a_assoc].[ID] AS [ID], 
-[tt_a_assoc].[_tt] AS [_tt], 
-[tt_a_assoc].[_a] AS [_a], 
-[tt_a_assoc].[_time] AS [_time]
-FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
+    [tt_a_assoc].[ID] AS [ID], 
+    [tt_a_assoc].[_tt] AS [_tt], 
+    [tt_a_assoc].[_a] AS [_a], 
+    [tt_a_assoc].[_time] AS [_time]
+    FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
             <End Role="Question" EntitySet="Question" />
@@ -324,6 +329,10 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             <End Role="Editor" EntitySet="Editor" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
+          <AssociationSet Name="FK_Test_Position" Association="Self.FK_Test_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
           <AssociationSet Name="FK_TestVersion_Test" Association="Self.FK_TestVersion_Test">
             <End Role="Test" EntitySet="Test" />
             <End Role="TestVersion" EntitySet="TestVersion" />
@@ -333,7 +342,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="zespolrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="WebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="a_id" />
@@ -370,6 +379,16 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="mod_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mod_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Editor" Relationship="Self.FK_Editor_Moderator" FromRole="Moderator" ToRole="Editor" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="po_id" />
+          </Key>
+          <Property Name="po_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="po_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="po_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="po_isActive" Type="Boolean" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_Test_Position" FromRole="Position" ToRole="Test" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -415,6 +434,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           <Property Name="t_pass_limit" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="t_time_limit" Type="Time" Precision="7" />
           <NavigationProperty Name="Editor" Relationship="Self.FK_Test_Editor" FromRole="Test" ToRole="Editor" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Test_Position" FromRole="Test" ToRole="Position" />
           <NavigationProperty Name="TestVersion" Relationship="Self.FK_TestVersion_Test" FromRole="Test" ToRole="TestVersion" />
         </EntityType>
         <EntityType Name="TestVersion">
@@ -445,14 +465,6 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </Key>
           <Property Name="lng_id" Type="Int32" Nullable="false" />
           <Property Name="lng_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Position">
-          <Key>
-            <PropertyRef Name="po_id" />
-          </Key>
-          <Property Name="po_id" Type="Int32" Nullable="false" />
-          <Property Name="po_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="po_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -530,6 +542,18 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Test_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="po_id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="t_po" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Question_QuestionType">
           <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -566,17 +590,17 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="zespolrEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ZespolREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Answer" EntityType="Self.Answer" />
           <EntitySet Name="Editor" EntityType="Self.Editor" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
           <EntitySet Name="Question" EntityType="Self.Question" />
           <EntitySet Name="QuestionType" EntityType="Self.QuestionType" />
           <EntitySet Name="Test" EntityType="Self.Test" />
           <EntitySet Name="TestVersion" EntityType="Self.TestVersion" />
           <EntitySet Name="Candidate" EntityType="Self.Candidate" />
           <EntitySet Name="Language" EntityType="Self.Language" />
-          <EntitySet Name="Position" EntityType="Self.Position" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TestTake" EntityType="Self.TestTake" />
           <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" />
@@ -591,6 +615,10 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK_Test_Editor" Association="Self.FK_Test_Editor">
             <End Role="Editor" EntitySet="Editor" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Position" Association="Self.FK_Test_Position">
+            <End Role="Position" EntitySet="Position" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
           <AssociationSet Name="FK_Question_QuestionType" Association="Self.FK_Question_QuestionType">
@@ -611,9 +639,9 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="zespolrModelStoreContainer" CdmEntityContainer="zespolrEntities">
+        <EntityContainerMapping StorageEntityContainer="WebModelStoreContainer" CdmEntityContainer="ZespolREntities">
           <EntitySetMapping Name="Answer">
-            <EntityTypeMapping TypeName="zespolrModel.Answer">
+            <EntityTypeMapping TypeName="WebModel.Answer">
               <MappingFragment StoreEntitySet="Answer">
                 <ScalarProperty Name="a_id" ColumnName="a_id" />
                 <ScalarProperty Name="a_q" ColumnName="a_q" />
@@ -624,7 +652,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Editor">
-            <EntityTypeMapping TypeName="zespolrModel.Editor">
+            <EntityTypeMapping TypeName="WebModel.Editor">
               <MappingFragment StoreEntitySet="Editor">
                 <ScalarProperty Name="ed_id" ColumnName="ed_id" />
                 <ScalarProperty Name="ed_name" ColumnName="ed_name" />
@@ -638,7 +666,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Moderator">
-            <EntityTypeMapping TypeName="zespolrModel.Moderator">
+            <EntityTypeMapping TypeName="WebModel.Moderator">
               <MappingFragment StoreEntitySet="Moderator">
                 <ScalarProperty Name="mod_id" ColumnName="mod_id" />
                 <ScalarProperty Name="mod_name" ColumnName="mod_name" />
@@ -648,8 +676,18 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="WebModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="po_id" ColumnName="po_id" />
+                <ScalarProperty Name="po_name" ColumnName="po_name" />
+                <ScalarProperty Name="po_desc" ColumnName="po_desc" />
+                <ScalarProperty Name="po_isActive" ColumnName="po_isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Question">
-            <EntityTypeMapping TypeName="zespolrModel.Question">
+            <EntityTypeMapping TypeName="WebModel.Question">
               <MappingFragment StoreEntitySet="Question">
                 <ScalarProperty Name="q_id" ColumnName="q_id" />
                 <ScalarProperty Name="q_head" ColumnName="q_head" />
@@ -664,7 +702,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuestionType">
-            <EntityTypeMapping TypeName="zespolrModel.QuestionType">
+            <EntityTypeMapping TypeName="WebModel.QuestionType">
               <MappingFragment StoreEntitySet="QuestionType">
                 <ScalarProperty Name="qt_id" ColumnName="qt_id" />
                 <ScalarProperty Name="qt_name" ColumnName="qt_name" />
@@ -674,7 +712,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Test">
-            <EntityTypeMapping TypeName="zespolrModel.Test">
+            <EntityTypeMapping TypeName="WebModel.Test">
               <MappingFragment StoreEntitySet="Test">
                 <ScalarProperty Name="t_id" ColumnName="t_id" />
                 <ScalarProperty Name="t_name" ColumnName="t_name" />
@@ -692,7 +730,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestVersion">
-            <EntityTypeMapping TypeName="zespolrModel.TestVersion">
+            <EntityTypeMapping TypeName="WebModel.TestVersion">
               <MappingFragment StoreEntitySet="TestVersion">
                 <ScalarProperty Name="tv_id" ColumnName="tv_id" />
                 <ScalarProperty Name="tv_t" ColumnName="tv_t" />
@@ -702,7 +740,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Candidate">
-            <EntityTypeMapping TypeName="zespolrModel.Candidate">
+            <EntityTypeMapping TypeName="WebModel.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
                 <ScalarProperty Name="ca_id" ColumnName="ca_id" />
                 <ScalarProperty Name="ca_name" ColumnName="ca_name" />
@@ -714,24 +752,15 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Language">
-            <EntityTypeMapping TypeName="zespolrModel.Language">
+            <EntityTypeMapping TypeName="WebModel.Language">
               <MappingFragment StoreEntitySet="Language">
                 <ScalarProperty Name="lng_id" ColumnName="lng_id" />
                 <ScalarProperty Name="lng_name" ColumnName="lng_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Position">
-            <EntityTypeMapping TypeName="zespolrModel.Position">
-              <MappingFragment StoreEntitySet="Position">
-                <ScalarProperty Name="po_id" ColumnName="po_id" />
-                <ScalarProperty Name="po_name" ColumnName="po_name" />
-                <ScalarProperty Name="po_desc" ColumnName="po_desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="zespolrModel.sysdiagrams">
+            <EntityTypeMapping TypeName="WebModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -742,7 +771,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestTake">
-            <EntityTypeMapping TypeName="zespolrModel.TestTake">
+            <EntityTypeMapping TypeName="WebModel.TestTake">
               <MappingFragment StoreEntitySet="TestTake">
                 <ScalarProperty Name="tt_id" ColumnName="tt_id" />
                 <ScalarProperty Name="tt_tv" ColumnName="tt_tv" />
@@ -754,7 +783,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestTakeStatus">
-            <EntityTypeMapping TypeName="zespolrModel.TestTakeStatus">
+            <EntityTypeMapping TypeName="WebModel.TestTakeStatus">
               <MappingFragment StoreEntitySet="TestTakeStatus">
                 <ScalarProperty Name="tts_id" ColumnName="tts_id" />
                 <ScalarProperty Name="tts_name" ColumnName="tts_name" />
@@ -763,7 +792,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tt_a_assoc">
-            <EntityTypeMapping TypeName="zespolrModel.tt_a_assoc">
+            <EntityTypeMapping TypeName="WebModel.tt_a_assoc">
               <MappingFragment StoreEntitySet="tt_a_assoc">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="C_tt" ColumnName="_tt" />
@@ -788,7 +817,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

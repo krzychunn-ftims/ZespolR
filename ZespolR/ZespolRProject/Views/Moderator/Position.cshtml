@@ -1,7 +1,7 @@
-﻿@model ZespolRProject.Models.Editor_Test
+﻿@model IEnumerable<ZespolRProject.Models.Position>
 
 @{
-    ViewBag.Title = "Managing redactors";
+    ViewBag.Title = "Managing positions";
 }
 
 <meta charset="utf-8">
@@ -23,14 +23,9 @@
         position: fixed;
     }
 
-    div.col-sm-3 div {
+    div.col-sm-9 div {
         height: 250px;
-        font-size: 20px;
-    }
-
-    div.col-sm-6 div {
-        height: 250px;
-        font-size: 20px;
+        font-size: 28px;
     }
 
     #section1 {
@@ -103,10 +98,10 @@
         <div class="row">
             <nav class="col-sm-3" id="myScrollspy">
                 <ul class="nav nav-pills nav-stacked">
-                    @foreach (var item in Model.Editors.Models)
-                    {
-                        <li><a href="#section1">@Html.DisplayFor(modelItem => item.ed_name)</a></li>
 
+                    @foreach (var item in Model)
+                    {
+                        string t = "Position " + @Html.DisplayFor(modelItem => item.po_name);
                     }
                 </ul>
 
@@ -115,38 +110,26 @@
 
                 </div>
             </nav>
-            <div class="col-sm-3">
+            <div class="col-sm-9">
 
-                @foreach (var item in Model.Editors.Models)
-                {
+                <table class="table" style='table-layout:fixed;'>
 
-                    <div id="section1">
-                        <h1>@Html.DisplayFor(modelItem => item.ed_name)</h1>
-                        <p>@Html.DisplayFor(modelItem => item.ed_surname)</p>
-                        <p>@Html.DisplayFor(modelItem => item.ed_phone)</p>
-                    </div>
-                }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.po_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.po_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.po_desc)
+                            </td>
+                        </tr>
+                    }
+                </table>
 
-                <div class="col-sm-12">
-                    <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="write for quick search">
-
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                @foreach (var item in Model.Tests.Models)
-                {
-
-                    <div id="section1">
-                        <h1>@Html.DisplayFor(modelItem => item.t_name)</h1>
-                        <p>@Html.DisplayFor(modelItem => item.t_desc)</p>
-                    </div>
-                }
-
-                <div class="col-sm-12">
-                    <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="write for quick search">
-
-                </div>
             </div>
         </div>
     </div>
@@ -154,15 +137,15 @@
     <div class="jumbotron">
 
         <div class="col-md-4">
-            <p><a href="http://asp.net" class="btn btn-primary btn-lg btn-block">Edit</a></p>
+            <p><a href="http://asp.net" class="btn btn-primary btn-lg btn-block">Activate</a></p>
         </div>
 
         <div class="col-md-4">
-            <p><a href="http://asp.net" class="btn btn-primary btn-lg btn-block">Delete</a></p>
+            <p><a href="http://asp.net" class="btn btn-primary btn-lg btn-block">Deactivate</a></p>
         </div>
 
         <div class="col-md-4">
-            <p><a href="http://asp.net" class="btn btn-primary btn-lg btn-block">Position</a></p>
+            <p><a href='@Url.Action("Create", "Position")' class="btn btn-primary btn-lg btn-block">Create Position</a></p>
         </div>
 
         <h1> </h1>
@@ -170,3 +153,5 @@
     </div>
 
 </body>
+
+
