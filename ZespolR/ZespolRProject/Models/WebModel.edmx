@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="zespolrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="zespolrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="a_id" />
@@ -60,13 +60,11 @@ warning 6002: The table/view 'zespolr.dbo.Language' does not have a primary key 
           <Property Name="mod_phone" Type="varchar" MaxLength="50" />
           <Property Name="mod_password" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'zespolr.dbo.Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="po_id" />
           </Key>
-          <Property Name="po_id" Type="int" Nullable="false" />
+          <Property Name="po_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="po_name" Type="varchar" MaxLength="50" />
           <Property Name="po_desc" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -243,66 +241,60 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Editor" EntityType="Self.Editor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestVersion" EntityType="Self.TestVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidate" EntityType="Self.Candidate" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[Candidate].[ca_id] AS [ca_id], 
-[Candidate].[ca_name] AS [ca_name], 
-[Candidate].[ca_surname] AS [ca_surname], 
-[Candidate].[ca_phone] AS [ca_phone], 
-[Candidate].[ca_def_lng] AS [ca_def_lng], 
-[Candidate].[ca_password] AS [ca_password]
-FROM [dbo].[Candidate] AS [Candidate]</DefiningQuery>
+    [Candidate].[ca_id] AS [ca_id], 
+    [Candidate].[ca_name] AS [ca_name], 
+    [Candidate].[ca_surname] AS [ca_surname], 
+    [Candidate].[ca_phone] AS [ca_phone], 
+    [Candidate].[ca_def_lng] AS [ca_def_lng], 
+    [Candidate].[ca_password] AS [ca_password]
+    FROM [dbo].[Candidate] AS [Candidate]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Language" EntityType="Self.Language" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[Language].[lng_id] AS [lng_id], 
-[Language].[lng_name] AS [lng_name]
-FROM [dbo].[Language] AS [Language]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Position" EntityType="Self.Position" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Position].[po_id] AS [po_id], 
-[Position].[po_name] AS [po_name], 
-[Position].[po_desc] AS [po_desc]
-FROM [dbo].[Position] AS [Position]</DefiningQuery>
+    [Language].[lng_id] AS [lng_id], 
+    [Language].[lng_name] AS [lng_name]
+    FROM [dbo].[Language] AS [Language]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[sysdiagrams].[name] AS [name], 
-[sysdiagrams].[principal_id] AS [principal_id], 
-[sysdiagrams].[diagram_id] AS [diagram_id], 
-[sysdiagrams].[version] AS [version], 
-[sysdiagrams].[definition] AS [definition]
-FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
+    [sysdiagrams].[name] AS [name], 
+    [sysdiagrams].[principal_id] AS [principal_id], 
+    [sysdiagrams].[diagram_id] AS [diagram_id], 
+    [sysdiagrams].[version] AS [version], 
+    [sysdiagrams].[definition] AS [definition]
+    FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TestTake" EntityType="Self.TestTake" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[TestTake].[tt_id] AS [tt_id], 
-[TestTake].[tt_tv] AS [tt_tv], 
-[TestTake].[tt_ca] AS [tt_ca], 
-[TestTake].[tt_start] AS [tt_start], 
-[TestTake].[tt_end] AS [tt_end], 
-[TestTake].[tt_status] AS [tt_status]
-FROM [dbo].[TestTake] AS [TestTake]</DefiningQuery>
+    [TestTake].[tt_id] AS [tt_id], 
+    [TestTake].[tt_tv] AS [tt_tv], 
+    [TestTake].[tt_ca] AS [tt_ca], 
+    [TestTake].[tt_start] AS [tt_start], 
+    [TestTake].[tt_end] AS [tt_end], 
+    [TestTake].[tt_status] AS [tt_status]
+    FROM [dbo].[TestTake] AS [TestTake]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[TestTakeStatus].[tts_id] AS [tts_id], 
-[TestTakeStatus].[tts_name] AS [tts_name], 
-[TestTakeStatus].[tts_closed] AS [tts_closed]
-FROM [dbo].[TestTakeStatus] AS [TestTakeStatus]</DefiningQuery>
+    [TestTakeStatus].[tts_id] AS [tts_id], 
+    [TestTakeStatus].[tts_name] AS [tts_name], 
+    [TestTakeStatus].[tts_closed] AS [tts_closed]
+    FROM [dbo].[TestTakeStatus] AS [TestTakeStatus]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tt_a_assoc" EntityType="Self.tt_a_assoc" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[tt_a_assoc].[ID] AS [ID], 
-[tt_a_assoc].[_tt] AS [_tt], 
-[tt_a_assoc].[_a] AS [_a], 
-[tt_a_assoc].[_time] AS [_time]
-FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
+    [tt_a_assoc].[ID] AS [ID], 
+    [tt_a_assoc].[_tt] AS [_tt], 
+    [tt_a_assoc].[_a] AS [_a], 
+    [tt_a_assoc].[_time] AS [_time]
+    FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
             <End Role="Question" EntitySet="Question" />
@@ -329,8 +321,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
             <End Role="TestVersion" EntitySet="TestVersion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zespolrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -788,7 +779,7 @@ FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
