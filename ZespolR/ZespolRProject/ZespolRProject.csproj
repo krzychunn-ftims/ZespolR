@@ -163,6 +163,7 @@
     <Compile Include="Controllers\KandydatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RedaktorController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -309,6 +310,13 @@
     <Content Include="Views\Editors\Details.cshtml" />
     <Content Include="Views\Editors\Edit.cshtml" />
     <Content Include="Views\Editors\Index.cshtml" />
+    <Content Include="Views\Moderator\Postion.cshtml" />
+    <Content Include="Views\Moderator\CreatePosition.cshtml" />
+    <Content Include="Views\Position\Create.cshtml" />
+    <Content Include="Views\Position\Delete.cshtml" />
+    <Content Include="Views\Position\Details.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
