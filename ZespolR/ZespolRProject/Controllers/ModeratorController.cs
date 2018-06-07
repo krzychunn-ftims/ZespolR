@@ -46,6 +46,13 @@ namespace ZespolRProject.Controllers
             return View(db.Editor.Where(x => x.ed_isActive == null).ToList());
         }
 
+        public ActionResult Position()
+        {
+
+            var a = db.Position.Where(x => x.po_name == null).ToList();
+            return View(db.Position.Where(x => x.po_name == null).ToList());
+        }
+
         public ActionResult details(int? id)
         {
 

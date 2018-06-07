@@ -310,7 +310,7 @@
     <Content Include="Views\Editors\Details.cshtml" />
     <Content Include="Views\Editors\Edit.cshtml" />
     <Content Include="Views\Editors\Index.cshtml" />
-    <Content Include="Views\Moderator\Postion.cshtml" />
+    <Content Include="Views\Moderator\Position.cshtml" />
     <Content Include="Views\Moderator\CreatePosition.cshtml" />
     <Content Include="Views\Position\Create.cshtml" />
     <Content Include="Views\Position\Delete.cshtml" />
