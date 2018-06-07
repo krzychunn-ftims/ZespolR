@@ -307,7 +307,6 @@
     <Content Include="Views\Moderator\t1.cshtml" />
     <Content Include="Views\Moderator\details.cshtml" />
     <Content Include="Views\Redaktor\Edit.cshtml" />
-    <Content Include="Views\Moderator\Create.cshtml" />
     <Content Include="Views\Editors\Create.cshtml" />
     <Content Include="Views\Editors\Delete.cshtml" />
     <Content Include="Views\Editors\Details.cshtml" />
@@ -331,15 +330,15 @@
     <Content Include="Views\Position\Edit.cshtml" />
     <Content Include="Views\Position\Index.cshtml" />
     <Content Include="Views\Moderator\Position.cshtml" />
-    <Content Include="Views\Moderator\Edit.cshtml" />
-    <Content Include="Views\Moderator\Create.cshtml" />
+    <Content Include="Views\Moderator\EditRedaktor.cshtml" />
     <Content Include="Views\Editors\Create.cshtml" />
     <Content Include="Views\Editors\Delete.cshtml" />
     <Content Include="Views\Editors\Details.cshtml" />
     <Content Include="Views\Editors\Edit.cshtml" />
     <Content Include="Views\Editors\Index.cshtml" />
     <Content Include="Views\Moderator\Delete1.cshtml" />
-    <Content Include="Views\Moderator\Delete.cshtml" />
+    <Content Include="Views\Moderator\DeleteRedaktor.cshtml" />
+    <Content Include="Views\Moderator\CreateRedaktor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

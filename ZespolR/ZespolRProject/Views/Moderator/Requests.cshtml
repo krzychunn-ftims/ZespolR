@@ -154,8 +154,8 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                         <td>
                             <ul class="nav nav-pills nav-stacked">
                              
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ed_id });
-                                     @Html.ActionLink("Delete", "Delete", new { id=item.ed_id })
+                                @Html.ActionLink("Edit", "EditRedaktor", new { id = item.ed_id });
+                                     @Html.ActionLink("Delete", "DeleteRedaktor", new { id=item.ed_id })
                             </ul>
 
                         </td>
@@ -275,14 +275,14 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
 
 
         <div class="col-md-3">
-            <p><a href="~/Moderator/Create" class="btn btn-primary btn-lg btn-block">Add new redactor</a></p>
+            <p><a href="~/Moderator/CreateRedaktor" class="btn btn-primary btn-lg btn-block">Add new redactor</a></p>
         </div>
  
  
 
-        <div class="col-md-4">
-            <p><a href='@Url.Action("Create", "Moderator")' class="btn btn-primary btn-lg btn-block">Create Editor</a></p>
-        </div>
+        @*<div class="col-md-4">
+            <p><a href='@Url.Action("CreateRedaktor", "Moderator")' class="btn btn-primary btn-lg btn-block">Create Editor</a></p>
+        </div>*@
 
         <h1> </h1>
 

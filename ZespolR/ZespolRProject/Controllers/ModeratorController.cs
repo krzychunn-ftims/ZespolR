@@ -116,7 +116,7 @@ namespace ZespolRProject.Controllers
 
         }
 
-        public ActionResult Create()
+        public ActionResult CreateRedaktor()
         {
             ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name");
             return View();
@@ -125,41 +125,41 @@ namespace ZespolRProject.Controllers
         // POST: Editors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Editor.Add(editor);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Editor.Add(editor);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-        public ActionResult Addnew()
-        {
-            return View();
-        }
+        //public ActionResult Addnew()
+        //{
+        //    return View();
+        //}
 
         // GET: Editors/Create
-        public ActionResult Create()
-        {
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name");
+        //    return View();
+        //}
 
         // POST: Editors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
+        public ActionResult CreateRedaktor([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
         {
             if (ModelState.IsValid)
             {
                 db.Editor.Add(editor);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Requests");
             }
 
             ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
@@ -168,7 +168,7 @@ namespace ZespolRProject.Controllers
 
 
         //GET: Editors/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult EditRedaktor(int? id)
         {
             if (id == null)
             {
@@ -188,7 +188,7 @@ namespace ZespolRProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
+        public ActionResult EditRedaktor([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
         {
             if (ModelState.IsValid)
             {
@@ -201,7 +201,7 @@ namespace ZespolRProject.Controllers
         }
 
         // GET: Editors/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult DeleteRedaktor(int? id)
         {
             if (id == null)
             {
@@ -216,14 +216,14 @@ namespace ZespolRProject.Controllers
         }
 
         // POST: Editors/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteRedaktor")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Editor editor = db.Editor.Find(id);
             db.Editor.Remove(editor);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Requests");
         }
         protected override void Dispose(bool disposing)
         {
@@ -238,9 +238,6 @@ namespace ZespolRProject.Controllers
     }
 
 
-
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
-            return View(editor);
-        }
-    }
+        
+    
 }
