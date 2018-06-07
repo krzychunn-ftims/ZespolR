@@ -159,10 +159,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\EditorsController.cs" />
     <Compile Include="Controllers\KandydatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RedaktorController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
@@ -237,6 +239,7 @@
     <Content Include="Content\bootsrap.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\1.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -310,13 +313,24 @@
     <Content Include="Views\Editors\Details.cshtml" />
     <Content Include="Views\Editors\Edit.cshtml" />
     <Content Include="Views\Editors\Index.cshtml" />
-    <Content Include="Views\Moderator\Position.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Delete.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Redaktor\DetailsAnswer.cshtml" />
+    <Content Include="Views\Answers\Create.cshtml" />
+    <Content Include="Views\Answers\Delete.cshtml" />
+    <Content Include="Views\Answers\Details.cshtml" />
+    <Content Include="Views\Answers\Edit.cshtml" />
+    <Content Include="Views\Answers\Index.cshtml" />
     <Content Include="Views\Moderator\CreatePosition.cshtml" />
     <Content Include="Views\Position\Create.cshtml" />
     <Content Include="Views\Position\Delete.cshtml" />
     <Content Include="Views\Position\Details.cshtml" />
     <Content Include="Views\Position\Edit.cshtml" />
     <Content Include="Views\Position\Index.cshtml" />
+    <Content Include="Views\Moderator\Position.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,7 +16,7 @@ namespace ZespolRProject.Models
     public partial class ZespolREntities : DbContext
     {
         public ZespolREntities()
-            : base("name=zespolrEntities")
+            : base("name=zespolREntities")
         {
         }
     

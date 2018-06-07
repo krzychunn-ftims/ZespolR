@@ -48,9 +48,7 @@ namespace ZespolRProject.Controllers
 
         public ActionResult Position()
         {
-
-            var a = db.Position.Where(x => x.po_name == null).ToList();
-            return View(db.Position.Where(x => x.po_name == null).ToList());
+            return View(db.Position.ToList());
         }
 
         public ActionResult details(int? id)
