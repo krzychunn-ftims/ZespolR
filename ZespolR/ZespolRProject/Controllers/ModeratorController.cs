@@ -251,12 +251,42 @@ namespace ZespolRProject.Controllers
             {
                 db.Position.Add(position);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Position");
             }
 
             return View(position);
         }
 
+        // GET: Positions/Edit/5
+        public ActionResult EditPosition(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Position position = db.Position.Find(id);
+            if (position == null)
+            {
+                return HttpNotFound();
+            }
+            return View(position);
+        }
+
+        // POST: Positions/Edit/5
+        // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
+        // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPosition([Bind(Include = "po_id,po_name,po_desc,po_isActive")] Position position)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(position).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Position");
+            }
+            return View(position);
+        }
     }
 
 

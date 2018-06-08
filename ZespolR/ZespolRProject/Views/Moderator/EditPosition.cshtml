@@ -1,8 +1,10 @@
 ﻿@model ZespolRProject.Models.Position
 
 @{
-    ViewBag.Title = "Create position";
+    ViewBag.Title = "Edit position";
 }
+
+<h2>Edit</h2>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +14,7 @@
 
 <style>
     body {
-        background-image: url("https://i.imgur.com/iMK7kmW.jpg");
+        background-image: url("https://i.imgur.com/XttUO20.jpg");
         background-color: #cccccc;
         position: relative;
     }
@@ -100,6 +102,7 @@
         <h4>Position</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.po_id)
 
         <div class="form-group">
             @Html.Label("Position name", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -129,8 +132,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success btn-sm" />
+                <input type="submit" value="Save" class="btn btn-success btn-sm" />
             </div>
         </div>
     </div>
 }
+
+

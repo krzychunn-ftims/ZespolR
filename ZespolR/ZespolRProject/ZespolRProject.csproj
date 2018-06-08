@@ -339,6 +339,7 @@
     <Content Include="Views\Positions\Edit.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
     <Content Include="Views\Moderator\CreatePosition.cshtml" />
+    <Content Include="Views\Moderator\EditPosition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

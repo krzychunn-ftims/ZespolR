@@ -12,7 +12,7 @@
 
 <style>
     body {
-        background-image: url("https://i.imgur.com/XttUO20.jpg");
+        background-image: url("https://i.imgur.com/iMK7kmW.jpg");
         background-color: #cccccc;
         position: relative;
     }
@@ -129,9 +129,10 @@
                                 @Html.DisplayFor(modelItem => item.po_desc)
                             </td>
                             <td>
-                                @Html.EditorFor(modelItem => item.po_isActive)
-                                @Html.ValidationMessageFor(modelItem => item.po_isActive, "", new { @class = "text-danger" })
-                                <input type="submit" value="Save" class="btn btn-success btn-sm" />
+                                @Html.DisplayFor(modelItem => item.po_isActive)
+                            </td>
+                            <td>
+                                <p><a href='@Url.Action("EditPosition", "Moderator", new { id = item.po_id })' class="btn btn-success btn-sm">Edit</a></p>
                             </td>
                         </tr>
 }
