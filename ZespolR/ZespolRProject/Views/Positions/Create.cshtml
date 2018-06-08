@@ -1,8 +1,10 @@
-﻿@model IEnumerable<ZespolRProject.Models.Position>
+﻿@model ZespolRProject.Models.Position
 
 @{
-    ViewBag.Title = "Managing positions";
+    ViewBag.Title = "Create";
 }
+
+<h2>Create</h2>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,66 +94,49 @@
 
 </div>
 
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
+<div class="form-horizontal">
+    <h4>Position</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                Position ID
-                            </th>
-                            <th>
-                                Position name
-                            </th>
-                            <th>
-                                Position description
-                            </th>
-                            <th>
-                                Is active?
-                            </th>
-                            <th></th>
-                        </tr>
-                    <tbody>
-                        @foreach (var item in Model)
-            {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.po_id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.po_name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.po_desc)
-                            </td>
-                            <td>
-                                @Html.EditorFor(modelItem => item.po_isActive)
-                                @Html.ValidationMessageFor(modelItem => item.po_isActive, "", new { @class = "text-danger" })
-                                <input type="submit" value="Save" class="btn btn-success btn-sm" />
-                            </td>
-                        </tr>
-}
-                    </tbody>
-                </table>
+    <div class="form-group">
+        @Html.LabelFor(model => model.po_name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.po_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.po_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.po_desc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.po_desc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.po_desc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.po_isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.po_isActive)
+                @Html.ValidationMessageFor(model => model.po_isActive, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
 
-    <div class="jumbotron">
-
-        <div class="col-md-12">
-            <p><a href='@Url.Action("CreatePosition", "Moderator")' class="btn btn-primary btn-lg btn-block">Create position</a></p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
-
-        <h1> </h1>
-
     </div>
+</div>
+}
 
-</body>
-
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

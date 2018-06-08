@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.po_desc)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.po_isActive)
+        </th>
         <th></th>
     </tr>
 
@@ -27,6 +30,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.po_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.po_isActive)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.po_id }) |

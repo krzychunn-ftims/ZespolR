@@ -164,8 +164,8 @@
     <Compile Include="Controllers\KandydatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\PositionsController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RedaktorController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -323,12 +323,6 @@
     <Content Include="Views\Answers\Details.cshtml" />
     <Content Include="Views\Answers\Edit.cshtml" />
     <Content Include="Views\Answers\Index.cshtml" />
-    <Content Include="Views\Moderator\CreatePosition.cshtml" />
-    <Content Include="Views\Position\Create.cshtml" />
-    <Content Include="Views\Position\Delete.cshtml" />
-    <Content Include="Views\Position\Details.cshtml" />
-    <Content Include="Views\Position\Edit.cshtml" />
-    <Content Include="Views\Position\Index.cshtml" />
     <Content Include="Views\Moderator\Position.cshtml" />
     <Content Include="Views\Moderator\EditRedaktor.cshtml" />
     <Content Include="Views\Editors\Create.cshtml" />
@@ -339,6 +333,12 @@
     <Content Include="Views\Moderator\Delete1.cshtml" />
     <Content Include="Views\Moderator\DeleteRedaktor.cshtml" />
     <Content Include="Views\Moderator\CreateRedaktor.cshtml" />
+    <Content Include="Views\Positions\Create.cshtml" />
+    <Content Include="Views\Positions\Delete.cshtml" />
+    <Content Include="Views\Positions\Details.cshtml" />
+    <Content Include="Views\Positions\Edit.cshtml" />
+    <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Moderator\CreatePosition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@ using ZespolRProject.Models;
 
 namespace ZespolRProject.Controllers
 {
-    public class PositionController : Controller
+    public class PositionsController : Controller
     {
         private ZespolREntities db = new ZespolREntities();
 
@@ -46,7 +46,7 @@ namespace ZespolRProject.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "po_id,po_name,po_desc")] Position position)
+        public ActionResult Create([Bind(Include = "po_id,po_name,po_desc,po_isActive")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ZespolRProject.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "po_id,po_name,po_desc")] Position position)
+        public ActionResult Edit([Bind(Include = "po_id,po_name,po_desc,po_isActive")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -113,6 +113,42 @@ namespace ZespolRProject.Controllers
             db.Position.Remove(position);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Activate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Position position = db.Position.Find(id);
+            if (position == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                position.po_isActive = true;
+            }
+            return RedirectToAction("Position");
+        }
+
+        public ActionResult Disactivate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Position position = db.Position.Find(id);
+            if (position == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                position.po_isActive = false;
+            }
+            return View(position);
         }
 
         protected override void Dispose(bool disposing)
