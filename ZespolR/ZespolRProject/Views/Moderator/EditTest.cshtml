@@ -1,0 +1,206 @@
+﻿@model ZespolRProject.Models.Test
+
+@{
+    ViewBag.Title = "EditTest";
+}
+
+<style>
+    body {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.jpg");
+        background-color: #cccccc;
+        position: relative;
+    }
+    /*background: rgba(150, 68, 207, 0.44) url(C:\Users\Влад\Desktop\1.jpg); /* Цвет фона и путь к файлу */ */
+    /*color: #fff; /* Цвет текста */
+    ul.nav-pills {
+        top: 20px;
+        position: fixed;
+    }
+
+    div.col-sm-3 div {
+        height: 250px;
+        font-size: 20px;
+    }
+
+    div.col-sm-6 div {
+        height: 250px;
+        font-size: 20px;
+    }
+
+    #section1 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+
+    #section2 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+
+    #section3 {
+        color: #fff;
+        background-color: #1d7ae5;
+    }
+</style>
+
+<style>
+    .jumbotron {
+        background-image: url("https://i.imgur.com/6E0HH40.jpg");
+    }
+</style>
+
+<div class="jumbotron">
+
+    <div class="container">
+        <div class="col-md-4">
+            <h4>Username @System.Web.HttpContext.Current.User.Identity.Name</h4>
+            <h4>Status-Moderator</h4>
+        </div>
+        <div class="col-md-offset-5">
+            <h3>Test search</h3>
+        </div>
+    </div>
+    <h1> </h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="Test name ">
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="jumbotron">
+
+    <div class="col-md-4">
+        <p><a href="~/Moderator/Index" class="btn btn-primary btn-lg btn-block">Managing redactors</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <p><a href="~/Moderator/Requests" class="btn btn-primary btn-lg btn-block">Redactor requests</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <p><a href='@Url.Action("Position", "Moderator")' class="btn btn-primary btn-lg btn-block">Managing positions</a></p>
+    </div>
+
+    <h1> </h1>
+
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.t_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_desc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_desc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_desc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_po, "t_po", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("t_po", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.t_po, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_def_lng, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_def_lng, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_def_lng, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_ed, "t_ed", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("t_ed", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.t_ed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_start, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_start, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_end, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_end, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_end, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_is_published, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.t_is_published)
+                    @Html.ValidationMessageFor(model => model.t_is_published, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_tt_limit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_tt_limit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_tt_limit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_pass_limit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_pass_limit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_pass_limit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.t_time_limit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.t_time_limit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.t_time_limit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

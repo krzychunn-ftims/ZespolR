@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ZespolRProject.Models.Test>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.t_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_def_lng)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_end)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_is_published)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_tt_limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_pass_limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_time_limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Editor.ed_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position.po_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_def_lng)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_end)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_is_published)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_tt_limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_pass_limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_time_limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Editor.ed_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position.po_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.t_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.t_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.t_id })
+        </td>
+    </tr>
+}
+
+</table>

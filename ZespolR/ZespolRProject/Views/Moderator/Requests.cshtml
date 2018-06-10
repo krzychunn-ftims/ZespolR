@@ -98,13 +98,13 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                     <thead>
                         <tr>
                             <th>
-                                Redaktor ID
+                                Test ID
                             </th>
                             <th>
-                                Redaktor name
+                                Test name
                             </th>
                             <th>
-                                Redaktor surname
+                                Test desk
                             </th>
                             <th>
                                 Redaktor Phone
@@ -125,45 +125,46 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                         </tr>
                     <tbody>
                         @foreach (var item in Model)
-    {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_surname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_phone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_def_lng)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_password)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_mod)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ed_isActive)
-                        </td>
-                        <td>
-                            <ul class="nav nav-pills nav-stacked">
-                             
-                                @Html.ActionLink("Edit", "EditRedaktor", new { id = item.ed_id });
-                                     @Html.ActionLink("Delete", "DeleteRedaktor", new { id=item.ed_id })
-                            </ul>
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_def_lng)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_mod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ed_isActive)
+                    </td>
+                    <td>
+                        <ul class="nav nav-pills nav-stacked">
 
-                        </td>
+                            @Html.ActionLink("Edit", "EditRedaktor", new { id = item.ed_id });
+                            @Html.ActionLink("Delete", "DeleteRedaktor", new { id = item.ed_id })
+                        </ul>
 
-                    </tr>
+                    </td>
+
+                </tr>
 }
                     </tbody>
                 </table>
+            </div>
                 @*<table class="table table-bordered">
                     <thead>
                         <tr>
@@ -235,7 +236,7 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                 </table>*@
 
 
-            </div>
+           
             @*<div class="col-sm-4">*@
                 @*<nav class="col-sm-1" id="myScrollspy">
                     <ul class="nav nav-pills nav-stacked">*@

@@ -194,7 +194,7 @@ namespace ZespolRProject.Controllers
             {
                 db.Entry(editor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Requests");
             }
             ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
             return View(editor);
@@ -287,6 +287,77 @@ namespace ZespolRProject.Controllers
             }
             return View(position);
         }
+
+
+
+
+
+        // GET: Tests/Edit/5
+        public ActionResult EditTest(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Test test = db.Test.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name", test.t_ed);
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name", test.t_po);
+            return View(test);
+        }
+
+        // POST: Tests/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditTest([Bind(Include = "t_id,t_name,t_desc,t_po,t_def_lng,t_ed,t_start,t_end,t_is_published,t_tt_limit,t_pass_limit,t_time_limit")] Test test)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(test).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name", test.t_ed);
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name", test.t_po);
+            return View(test);
+        }
+
+
+        // GET: Tests/Delete/5
+        public ActionResult DeleteTest(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Test test = db.Test.Find(id);
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            return View(test);
+        }
+
+        // POST: Tests/Delete/5
+        [HttpPost, ActionName("DeleteTest")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTestConfirmed(int id)
+        {
+            Test test = db.Test.Find(id);
+            db.Test.Remove(test);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+ 
+
+
+
     }
 
 

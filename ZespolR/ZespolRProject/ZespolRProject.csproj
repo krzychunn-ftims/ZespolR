@@ -340,6 +340,13 @@
     <Content Include="Views\Positions\Index.cshtml" />
     <Content Include="Views\Moderator\CreatePosition.cshtml" />
     <Content Include="Views\Moderator\EditPosition.cshtml" />
+    <Content Include="Views\Moderator\EditTest.cshtml" />
+    <Content Include="Views\Tests\Create.cshtml" />
+    <Content Include="Views\Tests\Delete.cshtml" />
+    <Content Include="Views\Tests\Details.cshtml" />
+    <Content Include="Views\Tests\Edit.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\Moderator\DeleteTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
