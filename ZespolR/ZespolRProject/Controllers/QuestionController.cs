@@ -116,7 +116,7 @@ namespace ZespolRProject.Controllers
         // POST: Question/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteQuestion(int id)
         {
             Question question = db.Question.Find(id);
             db.Question.Remove(question);

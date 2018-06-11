@@ -319,9 +319,9 @@
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Redaktor\DetailsAnswer.cshtml" />
     <Content Include="Views\Answers\Create.cshtml" />
-    <Content Include="Views\Answers\Delete.cshtml" />
+    <Content Include="Views\Redaktor\DeleteAnswer.cshtml" />
     <Content Include="Views\Answers\Details.cshtml" />
-    <Content Include="Views\Answers\Edit.cshtml" />
+    <Content Include="Views\Redaktor\EditAnswer.cshtml" />
     <Content Include="Views\Answers\Index.cshtml" />
     <Content Include="Views\Moderator\Position.cshtml" />
     <Content Include="Views\Moderator\EditRedaktor.cshtml" />
@@ -347,6 +347,8 @@
     <Content Include="Views\Tests\Edit.cshtml" />
     <Content Include="Views\Tests\Index.cshtml" />
     <Content Include="Views\Moderator\DeleteTest.cshtml" />
+    <Content Include="Views\Redaktor\ViewAnswer.cshtml" />
+    <Content Include="Views\Redaktor\CreateAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
