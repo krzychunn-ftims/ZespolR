@@ -12,14 +12,12 @@ namespace ZespolRProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Answer
+    public partial class Answ
     {
         public int a_id { get; set; }
-        public Nullable<int> a_q { get; set; }
-        public string a_body { get; set; }
-        public Nullable<decimal> a_score { get; set; }
-        public Nullable<bool> a_is_user { get; set; }
-    
-        public virtual Question Question { get; set; }
+        public Nullable<int> a_test { get; set; }
+        public Nullable<int> a_ques { get; set; }
+        public Nullable<int> a_cand { get; set; }
+        public string a_answ { get; set; }
     }
 }

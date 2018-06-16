@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\studia\Zwinne\Project\ZespolR\ZespolR\ZespolRProject\Models\WebModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Влад\Source\Repos\ZespolR\ZespolR\ZespolRProject\Models\WebModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -14,12 +14,6 @@ namespace ZespolRProject.Models
     
     public partial class Question
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
-        {
-            this.Answer = new HashSet<Answer>();
-        }
-    
         public int q_id { get; set; }
         public string q_head { get; set; }
         public string q_body { get; set; }
@@ -30,9 +24,8 @@ namespace ZespolRProject.Models
         public string q_answer { get; set; }
         public string q_comment { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answer { get; set; }
         public virtual QuestionType QuestionType { get; set; }
         public virtual TestVersion TestVersion { get; set; }
+        public virtual Test Test { get; set; }
     }
 }

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ZespolRProject.Models.Question>
+
+@{
+                /**/
+
+                ViewBag.Title = "TestTake";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.q_head)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.q_body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.q_is_neg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.q_max_score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.q_answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.q_comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionType.qt_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestVersion.tv_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestVersion.tv_id)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_head)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_is_neg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_max_score)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_answer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.q_comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionType.qt_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestVersion.tv_id)
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(modelItem => item.q_body, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(modelItem => item.q_body, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(modelItem => item.q_body, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.q_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.q_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.q_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+
