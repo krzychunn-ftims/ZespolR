@@ -19,5 +19,7 @@ namespace ZespolRProject.Models
         public Nullable<int> a_ques { get; set; }
         public Nullable<int> a_cand { get; set; }
         public string a_answ { get; set; }
+        public string a_helper { get; set; }
+        public Nullable<bool> a_user { get; set; }
     }
 }

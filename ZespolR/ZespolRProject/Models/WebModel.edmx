@@ -5,17 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'zespolr.dbo.Answ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Answ">
           <Key>
             <PropertyRef Name="a_id" />
           </Key>
-          <Property Name="a_id" Type="int" Nullable="false" />
+          <Property Name="a_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="a_test" Type="int" />
           <Property Name="a_ques" Type="int" />
           <Property Name="a_cand" Type="int" />
           <Property Name="a_answ" Type="varchar" MaxLength="50" />
+          <Property Name="a_helper" Type="varchar" MaxLength="50" />
+          <Property Name="a_user" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'zespolr.dbo.Candidate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -253,6 +253,7 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WebModelStoreContainer">
+          <EntitySet Name="Answ" EntityType="Self.Answ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Editor" EntityType="Self.Editor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
@@ -260,15 +261,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestVersion" EntityType="Self.TestVersion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Answ" EntityType="Self.Answ" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Answ].[a_id] AS [a_id], 
-    [Answ].[a_test] AS [a_test], 
-    [Answ].[a_ques] AS [a_ques], 
-    [Answ].[a_cand] AS [a_cand], 
-    [Answ].[a_answ] AS [a_answ]
-    FROM [dbo].[Answ] AS [Answ]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Candidate" EntityType="Self.Candidate" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Candidate].[ca_id] AS [ca_id], 
@@ -642,6 +634,8 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="a_ques" Type="Int32" />
           <Property Name="a_cand" Type="Int32" />
           <Property Name="a_answ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="a_helper" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="a_user" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -802,6 +796,8 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <EntitySetMapping Name="Answ">
             <EntityTypeMapping TypeName="WebModel.Answ">
               <MappingFragment StoreEntitySet="Answ">
+                <ScalarProperty Name="a_user" ColumnName="a_user" />
+                <ScalarProperty Name="a_helper" ColumnName="a_helper" />
                 <ScalarProperty Name="a_answ" ColumnName="a_answ" />
                 <ScalarProperty Name="a_cand" ColumnName="a_cand" />
                 <ScalarProperty Name="a_ques" ColumnName="a_ques" />

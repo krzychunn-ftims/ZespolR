@@ -70,22 +70,32 @@ namespace ZespolRProject.Controllers
         public ActionResult TestTake(int? id)
         {
             var question = db.Question.Include(q => q.QuestionType).Include(q => q.TestVersion).Where(x=>x.q_tv==id);
-            return View(question.ToList());
+            QuestionCollection q1 = new QuestionCollection();
+            q1.Models = question.ToList();
+            q1.testID = id.Value;
+            return View(q1);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TestTake([Bind(Include = "q_body")] Question question)
+        public ActionResult TestTake( QuestionCollection question)
         {
             if (ModelState.IsValid)
             {
-                db.Question.Add(question);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                for(int i=0; i<question.Models.Count;i++)
+                {
+                    
+                    Answ answer = new Answ();
+                    answer.a_test = question.testID;
+                    answer.a_ques = question.Models[i].q_id;
+                    answer.a_answ = question.Models[i].q_comment;
+                    answer.a_user = true;
+                    answer.a_cand = 1;
+                    db.Answ.Add(answer);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Candidate1");
             }
-
-            ViewBag.q_qt = new SelectList(db.QuestionType, "qt_id", "qt_name", question.q_qt);
-            ViewBag.q_tv = new SelectList(db.TestVersion, "tv_id", "tv_id", question.q_tv);
             return View(question);
         }
 

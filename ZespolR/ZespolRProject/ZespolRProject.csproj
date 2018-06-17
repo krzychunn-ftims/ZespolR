@@ -196,6 +196,7 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionCollection.cs" />
     <Compile Include="Models\QuestionType.cs">
       <DependentUpon>WebModel.tt</DependentUpon>
     </Compile>
