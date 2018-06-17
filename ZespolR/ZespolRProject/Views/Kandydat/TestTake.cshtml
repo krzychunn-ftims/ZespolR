@@ -21,6 +21,41 @@
         background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.jpg");
     }
 </style>
+<script language=JavaScript>
+      <!--
+    var message = "Kliknięcie prawym przyciskiem myszy jest złe!!";
+    ///////////////////////////////////
+    function clickIE4() {
+        if (event.button == 2) {
+            alert(message);
+            return false;
+        }
+    }
+    function clickNS4(e) {
+        if (document.layers || document.getElementById && !document.all) {
+            if (e.which == 2 || e.which == 3) {
+                alert(message);
+                return false;
+            }
+        }
+    }
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS4;
+    }
+    else if (document.all && !document.getElementById) {
+        document.onmousedown = clickIE4;
+    }
+    document.oncontextmenu = new Function("alert(message);return false")
+    // -->
+</script>
+
+
+ 
+
+ 
+ 
+
 
 <div class="jumbotron">
 
@@ -69,18 +104,18 @@
     <table class="table">
         <tr>
             @*<th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_answer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_body)
-            </th>*@
-          
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_answer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_body)
+                </th>*@
+
             @*<th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
+                </th>*@
             <th></th>
         </tr>
 
@@ -93,7 +128,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => modelItem.Models[i].q_body)
                 </td>
-               
+
                 <td>
                     @Html.HiddenFor(modelItem => modelItem.Models[i].q_id)
                 </td>
@@ -109,11 +144,11 @@
             <div class="col-md-9">
             </div>
             <div class="col-md-3">
-                
-                    <input type="submit" value="End Test" class="btn btn-default" />
-                
-            </div>
+
+                <input type="submit" value="End Test" class="btn btn-default" />
+
             </div>
         </div>
-            }
+    </div>
+}
 

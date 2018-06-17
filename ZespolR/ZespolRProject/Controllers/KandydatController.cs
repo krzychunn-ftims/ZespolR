@@ -116,6 +116,9 @@ namespace ZespolRProject.Controllers
                 return RedirectToAction("Candidate1");
             }
             return View(question);
+
+
+
         }
 
     }
