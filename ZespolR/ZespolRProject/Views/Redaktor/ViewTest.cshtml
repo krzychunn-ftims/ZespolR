@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<ZespolRProject.Models.Question>
 
-}
 
 
 
@@ -49,7 +48,7 @@
 <div class="jumbotron">
 
     <div class="col-md-4">
-        <p><a href="~/Redaktor/CreateQuestion" class="btn btn-primary btn-lg btn-block">Create Question </a></p>
+        <p><a href="@Url.Action("CreateQuestion", "Redaktor", new { id = this.Model.FirstOrDefault().q_tv })" class="btn btn-primary btn-lg btn-block">Create Question </a></p>
     </div>
 
     <div class="col-md-4">
@@ -132,28 +131,30 @@
             <thead>
                 <tr>
                     <th>Question</th>
+                    <th>Question Body</th>
                     <th>Answer</th>
-                    <th>Comment</th>
-                    <th>Answer variations</th>
+                    <th> </th>
                 </tr>
             </thead>
 
 
-            @foreach (var item in Model)
-            {
-                <tbody>
-                    <tr class="success">
-                        <td>@Html.DisplayFor(modelItem => item.q_head)</td>
-                        <td>@Html.DisplayFor(modelItem => item.q_answer)</td>
-                        <td>@Html.DisplayFor(modelItem => item.q_comment)</td>
-                        <td>
-                          @Html.ActionLink("show", "ViewAnswer", "Redaktor", new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
-                            @Html.ActionLink("delete", "DeleteQuestion", "Redaktor", new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
-                        <td>
-</tr>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr class="success">
+                            <td>@Html.DisplayFor(modelItem => item.q_head)</td>
+                            <td>@Html.DisplayFor(modelItem => item.q_body)</td>
+                            <td>@Html.DisplayFor(modelItem => item.q_answer)</td>
+                            <td>
+                                @Html.ActionLink("delete", "DeleteQuestion", "Redaktor", new { id = item.q_id }, new { @class = "btn btn-success btn-sm" })
+                            <td>
+                        </tr>
 
-                </tbody>
-            }
+                    </tbody>
+                }
+
+
+
         </table>
     </div>
 

@@ -26,6 +26,7 @@
         <AssociationConnector Association="WebModel.FK_TestVersion_Test" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Question_Test" />
         <EntityTypeShape EntityType="WebModel.Answ" Width="1.5" PointX="0.75" PointY="11.75" />
+        <AssociationConnector Association="WebModel.FK_Position_Position" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

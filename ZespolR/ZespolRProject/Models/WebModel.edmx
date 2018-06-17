@@ -180,6 +180,18 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Position_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Position1" Type="Self.Position" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="po_id" />
+            </Principal>
+            <Dependent Role="Position1">
+              <PropertyRef Name="po_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Question_QuestionType">
           <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -193,23 +205,13 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Question_Test">
-          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Question" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Test">
               <PropertyRef Name="t_id" />
-            </Principal>
-            <Dependent Role="Question">
-              <PropertyRef Name="q_tv" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Question_TestVersion">
-          <End Role="TestVersion" Type="Self.TestVersion" Multiplicity="0..1" />
-          <End Role="Question" Type="Self.Question" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TestVersion">
-              <PropertyRef Name="tv_id" />
             </Principal>
             <Dependent Role="Question">
               <PropertyRef Name="q_tv" />
@@ -225,18 +227,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Principal>
             <Dependent Role="Test">
               <PropertyRef Name="t_ed" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Test_Position">
-          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
-          <End Role="Test" Type="Self.Test" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Position">
-              <PropertyRef Name="po_id" />
-            </Principal>
-            <Dependent Role="Test">
-              <PropertyRef Name="t_po" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -315,6 +305,10 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="Moderator" EntitySet="Moderator" />
             <End Role="Editor" EntitySet="Editor" />
           </AssociationSet>
+          <AssociationSet Name="FK_Position_Position" Association="Self.FK_Position_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Position1" EntitySet="Position" />
+          </AssociationSet>
           <AssociationSet Name="FK_Question_QuestionType" Association="Self.FK_Question_QuestionType">
             <End Role="QuestionType" EntitySet="QuestionType" />
             <End Role="Question" EntitySet="Question" />
@@ -323,16 +317,8 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="Test" EntitySet="Test" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
-          <AssociationSet Name="FK_Question_TestVersion" Association="Self.FK_Question_TestVersion">
-            <End Role="TestVersion" EntitySet="TestVersion" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
           <AssociationSet Name="FK_Test_Editor" Association="Self.FK_Test_Editor">
             <End Role="Editor" EntitySet="Editor" />
-            <End Role="Test" EntitySet="Test" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Test_Position" Association="Self.FK_Test_Position">
-            <End Role="Position" EntitySet="Position" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
           <AssociationSet Name="FK_TestVersion_Test" Association="Self.FK_TestVersion_Test">
@@ -379,6 +365,8 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="po_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="po_isActive" Type="Boolean" />
           <NavigationProperty Name="Test" Relationship="Self.FK_Test_Position" FromRole="Position" ToRole="Test" />
+          <NavigationProperty Name="Position1" Relationship="WebModel.FK_Position_Position" FromRole="Position" ToRole="Position1" />
+          <NavigationProperty Name="Position2" Relationship="WebModel.FK_Position_Position" FromRole="Position1" ToRole="Position" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -612,6 +600,10 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
           <EntitySet Name="Answ" EntityType="WebModel.Answ" />
+          <AssociationSet Name="FK_Position_Position" Association="WebModel.FK_Position_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Position1" EntitySet="Position" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Question_Test">
           <End Type="WebModel.Test" Role="Test" Multiplicity="0..1" />
@@ -637,6 +629,18 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="a_helper" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="a_user" Type="Boolean" />
         </EntityType>
+        <Association Name="FK_Position_Position">
+          <End Type="WebModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="WebModel.Position" Role="Position1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="po_id" />
+            </Principal>
+            <Dependent Role="Position1">
+              <PropertyRef Name="po_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

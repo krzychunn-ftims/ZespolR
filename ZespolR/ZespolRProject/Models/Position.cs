@@ -27,5 +27,7 @@ namespace ZespolRProject.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Test> Test { get; set; }
+        public virtual Position Position1 { get; set; }
+        public virtual Position Position2 { get; set; }
     }
 }
