@@ -51,7 +51,26 @@ namespace ZespolRProject.Controllers
 
         public ActionResult Candidate2()
         {
-            return View();
+            List<Test> list = db.Test.ToList();
+            List<Editor> list2 = db.Editor.ToList();
+
+            TestsCollection a = new TestsCollection();
+            EditorsCollection b = new EditorsCollection();
+
+            Editor_Test c = new Editor_Test();
+
+            foreach (Test item in list)
+            {
+                c.Tests.Models.Add(item);
+            }
+
+            c.Editors.Models = new List<Editor>();
+            foreach (Editor item in list2)
+            {
+                c.Editors.Models.Add(item);
+            }
+
+            return View(c);
         }
 
         //public ActionResult TestTake(int? id)
@@ -97,6 +116,9 @@ namespace ZespolRProject.Controllers
                 return RedirectToAction("Candidate1");
             }
             return View(question);
+
+
+
         }
 
     }

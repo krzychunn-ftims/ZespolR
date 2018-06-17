@@ -1,49 +1,121 @@
 ﻿@model ZespolRProject.Models.QuestionCollection
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "TestTake";
+    ViewBag.Title = "TestTake";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-light-4837.png");
+        background-color: #cccccc;
+    }
+    /*background: rgba(150, 68, 207, 0.44) url(C:\Users\Влад\Desktop\1.jpg); /* Цвет фона и путь к файлу */ */
+    /*color: #fff; /* Цвет текста */
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+</style>
+
+<style>
+    .jumbotron {
+        background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.jpg");
+    }
+</style>
+<script language=JavaScript>
+      <!--
+    var message = "Kliknięcie prawym przyciskiem myszy jest złe!!";
+    ///////////////////////////////////
+    function clickIE4() {
+        if (event.button == 2) {
+            alert(message);
+            return false;
+        }
+    }
+    function clickNS4(e) {
+        if (document.layers || document.getElementById && !document.all) {
+            if (e.which == 2 || e.which == 3) {
+                alert(message);
+                return false;
+            }
+        }
+    }
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS4;
+    }
+    else if (document.all && !document.getElementById) {
+        document.onmousedown = clickIE4;
+    }
+    document.oncontextmenu = new Function("alert(message);return false")
+    // -->
+</script>
+
+
+ 
+
+ 
+ 
+
+
+<div class="jumbotron">
+
+    <div class="container">
+        <div class="col-md-4">
+            <h4>Username</h4>
+            <h4>Status-Candidate</h4>
+        </div>
+        <div class="col-md-offset-5">
+            <h3>Test search</h3>
+        </div>
+
+
+    </div>
+
+    <h1> </h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <input id="email" type="text" class="form-control" style="width: 100% !important; max-width: initial;" name="email" placeholder="Test name ">
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="jumbotron">
+
+    <div class="col-md-6">
+        <p><a href="~/Kandydat/Candidate1" class="btn btn-primary btn-lg btn-block">Added Tests </a></p>
+    </div>
+
+    <div class="col-md-6">
+        <p><a href="~/Kandydat/Candidate2" class="btn btn-primary btn-lg btn-block">My Marks</a></p>
+    </div>
+    <h1> </h1>
+</div>
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.testID)
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_answer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_body)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_is_neg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_max_score)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_answer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().QuestionType.qt_name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_answer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().q_body)
+                </th>*@
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Models.FirstOrDefault().TestVersion.tv_id)
+                </th>*@
             <th></th>
         </tr>
 
@@ -56,21 +128,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => modelItem.Models[i].q_body)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.Models[i].q_is_neg)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.Models[i].q_max_score)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.Models[i].q_answer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.Models[i].q_comment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.Models[i].QuestionType.qt_name)
-                </td>
+
                 <td>
                     @Html.HiddenFor(modelItem => modelItem.Models[i].q_id)
                 </td>
@@ -82,8 +140,14 @@
     </table>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="row">
+            <div class="col-md-9">
+            </div>
+            <div class="col-md-3">
+
+                <input type="submit" value="End Test" class="btn btn-default" />
+
+            </div>
         </div>
     </div>
 }
