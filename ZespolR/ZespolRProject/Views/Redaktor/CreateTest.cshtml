@@ -10,6 +10,7 @@
     }
     /*background: rgba(150, 68, 207, 0.44) url(C:\Users\Влад\Desktop\1.jpg); /* Цвет фона и путь к файлу */ */
     /*color: #fff; /* Цвет текста */
+
 </style>
 
 <style>
@@ -91,7 +92,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="btn-group btn-group-justified">
-                    <p>  <a href="#" class="btn btn-success">Find on Wikipedia</a></p>
+                    <p>  <a href="#" class="btn btn-success" onclick="findOnWikipedia(window.getSelection().toString())">Find on Wikipedia</a></p>
                 </div>
             </div>
         </div>
@@ -99,7 +100,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="btn-group btn-group-justified">
-                    <p>  <a href="#" class="btn btn-success">Find a synonym</a></p>
+                    <p>  <a href="#" class="btn btn-success" onclick="findASynonym(window.getSelection().toString())">Find a synonym</a></p>
                 </div>
             </div>
         </div>
@@ -173,3 +174,46 @@
     </div>
 
 </div>
+
+<script>
+    function findOnWikipedia(text) {
+
+        if (!isNullOrWhiteSpace(text)) {
+            var URL = 'https://www.wikipedia.org/wiki/';
+
+            URL += text;
+
+            var tab = window.open(URL, '_blank');
+            tab.focus();
+
+        } else {
+            showPopup();
+        }
+
+    }
+
+    function findASynonym(text) {
+
+        if (!isNullOrWhiteSpace(text)) {
+            var URL = 'http://www.thesaurus.com/browse/';
+
+            URL += text;
+            URL += "?s=t"
+
+
+            var tab = window.open(URL, '_blank');
+            tab.focus();
+        } else {
+            showPopup();
+        }
+    }
+
+    function isNullOrWhiteSpace(str) {
+        return (!str || str.length === 0 || /^\s*$/.test(str))
+    }
+
+    function showPopup() {
+        var popup = document.getElementById("selectTextToFindPopup");
+        popup.classList.toggle("show");
+    }
+</script>
