@@ -25,7 +25,6 @@ namespace ZespolRProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Answer> Answer { get; set; }
         public virtual DbSet<Editor> Editor { get; set; }
         public virtual DbSet<Moderator> Moderator { get; set; }
         public virtual DbSet<Position> Position { get; set; }
@@ -39,5 +38,6 @@ namespace ZespolRProject.Models
         public virtual DbSet<TestTake> TestTake { get; set; }
         public virtual DbSet<TestTakeStatus> TestTakeStatus { get; set; }
         public virtual DbSet<tt_a_assoc> tt_a_assoc { get; set; }
+        public virtual DbSet<Answ> Answ { get; set; }
     }
 }

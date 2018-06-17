@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c44ae127118643f896fa018758075a19" Name="Diagram1">
-        <EntityTypeShape EntityType="WebModel.Answer" Width="1.5" PointX="12" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WebModel.Editor" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WebModel.Moderator" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WebModel.Position" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
@@ -19,13 +18,14 @@
         <EntityTypeShape EntityType="WebModel.TestTake" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebModel.TestTakeStatus" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebModel.tt_a_assoc" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="WebModel.FK_Answer_Question" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Editor_Moderator" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Test_Editor" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Test_Position" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Question_QuestionType" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_Question_TestVersion" ManuallyRouted="false" />
         <AssociationConnector Association="WebModel.FK_TestVersion_Test" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK_Question_Test" />
+        <EntityTypeShape EntityType="WebModel.Answ" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

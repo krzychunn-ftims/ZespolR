@@ -18,6 +18,7 @@ namespace ZespolRProject.Models
         public Test()
         {
             this.TestVersion = new HashSet<TestVersion>();
+            this.Question = new HashSet<Question>();
         }
     
         public int t_id { get; set; }
@@ -37,5 +38,7 @@ namespace ZespolRProject.Models
         public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestVersion> TestVersion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Question> Question { get; set; }
     }
 }

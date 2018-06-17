@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ZespolRProject.Models.Editor_Test
+
+@{
     ViewBag.Title = "TestScore";
 }
 <style>
@@ -47,11 +49,11 @@
 <div class="jumbotron">
 
     <div class="col-md-6">
-        <p><a href="~/Home/Candidate1" class="btn btn-primary btn-lg btn-block">Added Tests </a></p>
+        <p><a href="~/Kandydat/Candidate1" class="btn btn-primary btn-lg btn-block">Added Tests </a></p>
     </div>
 
     <div class="col-md-6">
-        <p><a href="~/Home/Candidate2" class="btn btn-primary btn-lg btn-block">My Marks</a></p>
+        <p><a href="~/Kandydat/Candidate2" class="btn btn-primary btn-lg btn-block">My Marks</a></p>
     </div>
     <h1> </h1>
 </div>
@@ -59,74 +61,115 @@
 
 
 
-<div class="row">
-    <div class="col-md-10">
-    
-    </div>
-    <div class="col-md-2">
-        <h4>Status of Tests</h4>
-    </div>
+@*<div class="row">
+        <div class="col-md-10">
+
+        </div>
+        <div class="col-md-2">
+            <h4>Status of Tests</h4>
+        </div>
+    </div>*@
+
+<div class="col-sm-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+
+                <th>
+                    Test name
+                </th>
+                <th>
+                    Test deskription
+                </th>
+                <th>
+                    Position
+                </th>
+                <th>
+                    Default language
+                </th>
+                <th>
+                    Editor
+                </th>
+                <th>
+                    Published
+                </th>
+          
+                <th>
+                    Time Limit
+                </th>
+                <th></th>
+            </tr>
+        <tbody>
+            @foreach (var item in Model.Tests.Models)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_desc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_po)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_def_lng)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_ed)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_is_published)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.t_time_limit)
+                    </td>
+                    <td>
+                        <ul class="nav nav-pills nav-stacked">
+
+                            @Html.ActionLink("Start", "TestTake", new { id = item.t_id });
+
+                        </ul>
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<body>
-    <div class="row">
-        <div class="col-md-10">
-            <div class="container ">
+@*<div class="row">
 
-                <div class="list-group  " >
-                    <a href="#" class="list-group-item">Test 1</a>
-                    <a href="#" class="list-group-item">Test 2</a>
-                    <a href="#" class="list-group-item">Test 3</a>
-                    <a href="#" class="list-group-item">Test 4</a>
-
-                </div>
-            </div>
-        </div>
-   
-        <div class="col-md-2">
-            <div class="container ">
-
-                <div class="list-group ">
-                    <a href="#" class="list-group-item active ">Marked</a>
-                    <a href="#" class="list-group-item ">In progress</a>
-                    <a href="#" class="list-group-item ">In progress</a>
-                    <a href="#" class="list-group-item ">In progress</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
- 
-<div class="row">
-    
     <div class="col-md-3">
         <div class="container">
-    <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#myModal">Start test</button>
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">TEST FORM DB</h4>
-                </div>
-                <div class="modal-body">
-                    <p>TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#myModal">Start test</button>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">TEST FORM DB</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB TEST FORM DB</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 
-            <div class="col-md-3">
-                <p><a href="http://asp.net" class="btn btn-success btn-lg btn-block">Remove Test</a></p>
-            </div>
-        
-
+    <div class="col-md-3">
+        <p><a href="http://asp.net" class="btn btn-success btn-lg btn-block">Remove Test</a></p>
     </div>
-    <h3>   </h3>
-    <p>                  </p>
+
+
+</div>
+<h3>   </h3>
+<p>                  </p>*@

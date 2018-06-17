@@ -4,16 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Answer">
+    <Schema Namespace="WebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answ">
           <Key>
             <PropertyRef Name="a_id" />
           </Key>
           <Property Name="a_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="a_q" Type="int" />
-          <Property Name="a_body" Type="varchar" MaxLength="50" />
-          <Property Name="a_score" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="a_is_user" Type="bit" />
+          <Property Name="a_test" Type="int" />
+          <Property Name="a_ques" Type="int" />
+          <Property Name="a_cand" Type="int" />
+          <Property Name="a_answ" Type="varchar" MaxLength="50" />
+          <Property Name="a_helper" Type="varchar" MaxLength="50" />
+          <Property Name="a_user" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'zespolr.dbo.Candidate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -166,18 +168,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="_a" Type="int" />
           <Property Name="_time" Type="datetime" />
         </EntityType>
-        <Association Name="FK_Answer_Question">
-          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
-          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="q_id" />
-            </Principal>
-            <Dependent Role="Answer">
-              <PropertyRef Name="a_q" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Editor_Moderator">
           <End Role="Moderator" Type="Self.Moderator" Multiplicity="0..1" />
           <End Role="Editor" Type="Self.Editor" Multiplicity="*" />
@@ -199,6 +189,18 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Principal>
             <Dependent Role="Question">
               <PropertyRef Name="q_qt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="q_tv" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -251,7 +253,7 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WebModelStoreContainer">
-          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answ" EntityType="Self.Answ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Editor" EntityType="Self.Editor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
@@ -309,16 +311,16 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
     [tt_a_assoc].[_time] AS [_time]
     FROM [dbo].[tt_a_assoc] AS [tt_a_assoc]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="Answer" EntitySet="Answer" />
-          </AssociationSet>
           <AssociationSet Name="FK_Editor_Moderator" Association="Self.FK_Editor_Moderator">
             <End Role="Moderator" EntitySet="Moderator" />
             <End Role="Editor" EntitySet="Editor" />
           </AssociationSet>
           <AssociationSet Name="FK_Question_QuestionType" Association="Self.FK_Question_QuestionType">
             <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Test" Association="Self.FK_Question_Test">
+            <End Role="Test" EntitySet="Test" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
           <AssociationSet Name="FK_Question_TestVersion" Association="Self.FK_Question_TestVersion">
@@ -338,22 +340,10 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="TestVersion" EntitySet="TestVersion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Answer">
-          <Key>
-            <PropertyRef Name="a_id" />
-          </Key>
-          <Property Name="a_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="a_q" Type="Int32" />
-          <Property Name="a_body" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="a_score" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="a_is_user" Type="Boolean" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Answer_Question" FromRole="Answer" ToRole="Question" />
-        </EntityType>
         <EntityType Name="Editor">
           <Key>
             <PropertyRef Name="ed_id" />
@@ -403,9 +393,9 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="q_tv" Type="Int32" />
           <Property Name="q_answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="q_comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Answer" Relationship="Self.FK_Answer_Question" FromRole="Question" ToRole="Answer" />
           <NavigationProperty Name="QuestionType" Relationship="Self.FK_Question_QuestionType" FromRole="Question" ToRole="QuestionType" />
           <NavigationProperty Name="TestVersion" Relationship="Self.FK_Question_TestVersion" FromRole="Question" ToRole="TestVersion" />
+          <NavigationProperty Name="Test" Relationship="WebModel.FK_Question_Test" FromRole="Question" ToRole="Test" />
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
@@ -436,6 +426,7 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <NavigationProperty Name="Editor" Relationship="Self.FK_Test_Editor" FromRole="Test" ToRole="Editor" />
           <NavigationProperty Name="Position" Relationship="Self.FK_Test_Position" FromRole="Test" ToRole="Position" />
           <NavigationProperty Name="TestVersion" Relationship="Self.FK_TestVersion_Test" FromRole="Test" ToRole="TestVersion" />
+          <NavigationProperty Name="Question" Relationship="WebModel.FK_Question_Test" FromRole="Test" ToRole="Question" />
         </EntityType>
         <EntityType Name="TestVersion">
           <Key>
@@ -506,18 +497,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="C_a" Type="Int32" />
           <Property Name="C_time" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK_Answer_Question">
-          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
-          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="q_id" />
-            </Principal>
-            <Dependent Role="Answer">
-              <PropertyRef Name="a_q" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Editor_Moderator">
           <End Role="Moderator" Type="Self.Moderator" Multiplicity="0..1" />
           <End Role="Editor" Type="Self.Editor" Multiplicity="*" />
@@ -591,7 +570,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ZespolREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Answer" EntityType="Self.Answer" />
           <EntitySet Name="Editor" EntityType="Self.Editor" />
           <EntitySet Name="Moderator" EntityType="Self.Moderator" />
           <EntitySet Name="Position" EntityType="Self.Position" />
@@ -605,10 +583,6 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <EntitySet Name="TestTake" EntityType="Self.TestTake" />
           <EntitySet Name="TestTakeStatus" EntityType="Self.TestTakeStatus" />
           <EntitySet Name="tt_a_assoc" EntityType="Self.tt_a_assoc" />
-          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="Answer" EntitySet="Answer" />
-          </AssociationSet>
           <AssociationSet Name="FK_Editor_Moderator" Association="Self.FK_Editor_Moderator">
             <End Role="Moderator" EntitySet="Moderator" />
             <End Role="Editor" EntitySet="Editor" />
@@ -633,24 +607,42 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="Test" EntitySet="Test" />
             <End Role="TestVersion" EntitySet="TestVersion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Question_Test" Association="WebModel.FK_Question_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <EntitySet Name="Answ" EntityType="WebModel.Answ" />
         </EntityContainer>
+        <Association Name="FK_Question_Test">
+          <End Type="WebModel.Test" Role="Test" Multiplicity="0..1" />
+          <End Type="WebModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="q_tv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Answ">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="Int32" Nullable="false" />
+          <Property Name="a_test" Type="Int32" />
+          <Property Name="a_ques" Type="Int32" />
+          <Property Name="a_cand" Type="Int32" />
+          <Property Name="a_answ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="a_helper" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="a_user" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WebModelStoreContainer" CdmEntityContainer="ZespolREntities">
-          <EntitySetMapping Name="Answer">
-            <EntityTypeMapping TypeName="WebModel.Answer">
-              <MappingFragment StoreEntitySet="Answer">
-                <ScalarProperty Name="a_id" ColumnName="a_id" />
-                <ScalarProperty Name="a_q" ColumnName="a_q" />
-                <ScalarProperty Name="a_body" ColumnName="a_body" />
-                <ScalarProperty Name="a_score" ColumnName="a_score" />
-                <ScalarProperty Name="a_is_user" ColumnName="a_is_user" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Editor">
             <EntityTypeMapping TypeName="WebModel.Editor">
               <MappingFragment StoreEntitySet="Editor">
@@ -798,6 +790,19 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
                 <ScalarProperty Name="C_tt" ColumnName="_tt" />
                 <ScalarProperty Name="C_a" ColumnName="_a" />
                 <ScalarProperty Name="C_time" ColumnName="_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answ">
+            <EntityTypeMapping TypeName="WebModel.Answ">
+              <MappingFragment StoreEntitySet="Answ">
+                <ScalarProperty Name="a_user" ColumnName="a_user" />
+                <ScalarProperty Name="a_helper" ColumnName="a_helper" />
+                <ScalarProperty Name="a_answ" ColumnName="a_answ" />
+                <ScalarProperty Name="a_cand" ColumnName="a_cand" />
+                <ScalarProperty Name="a_ques" ColumnName="a_ques" />
+                <ScalarProperty Name="a_test" ColumnName="a_test" />
+                <ScalarProperty Name="a_id" ColumnName="a_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
