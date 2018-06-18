@@ -44,7 +44,7 @@ namespace ZespolRProject.Controllers
         {
 
             //var a = db.Editor.Where(x => x.ed_isActive == null).ToList();
-            return View(db.Editor.ToList());
+            return View(db.Users.Where(x=>x.isEditor==true && x.isActivated!=true));
         }
 
         public ActionResult Position()
@@ -75,40 +75,7 @@ namespace ZespolRProject.Controllers
 
             return View(db.Editor.Where(x => x.ed_isActive == null).ToList());
         }
-        //public ActionResult Edit(int? id)
-        //{
 
-        //    {
-        //        if (id == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        }
-        //        Editor editor = db.Editor.Find(id);
-        //        if (editor == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
-
-        //        return View(editor);
-        //    }
-        //}
-        //public ActionResult Delete(int? id)
-        //{
-
-        //    {
-        //        if (id == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        }
-        //        Editor editor = db.Editor.Find(id);
-        //        if (editor == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
-
-        //        return View(editor);
-        //    }
-        //}
 
         public ActionResult t1()
         {
@@ -118,7 +85,7 @@ namespace ZespolRProject.Controllers
 
         public ActionResult CreateRedaktor()
         {
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name");
+            //ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name");
             return View();
         }
 
@@ -153,17 +120,18 @@ namespace ZespolRProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRedaktor([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
+        public ActionResult CreateRedaktor([Bind(Include = "email,password,")] Users users)
         {
             if (ModelState.IsValid)
             {
-                db.Editor.Add(editor);
+                users.isEditor = true;
+                users.isActivated = true;
+                db.Users.Add(users);
                 db.SaveChanges();
-                return RedirectToAction("Requests");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
-            return View(editor);
+            return View(users);
         }
 
 
@@ -174,12 +142,12 @@ namespace ZespolRProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Editor editor = db.Editor.Find(id);
+            Users editor = db.Users.Find(id);
             if (editor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
+            //ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
             return View(editor);
         }
 
@@ -188,43 +156,39 @@ namespace ZespolRProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditRedaktor([Bind(Include = "ed_id,ed_name,ed_surname,ed_phone,ed_def_lng,ed_password,ed_mod,ed_isActive")] Editor editor)
+        public ActionResult EditRedaktor([Bind(Include = "user_id,email,isActivated,password")] Users editor)
         {
             if (ModelState.IsValid)
             {
+                editor.isEditor = true;
                 db.Entry(editor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Requests");
             }
-            ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
+            //ViewBag.ed_mod = new SelectList(db.Moderator, "mod_id", "mod_name", editor.ed_mod);
             return View(editor);
         }
 
         // GET: Editors/Delete/5
         public ActionResult DeleteRedaktor(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Editor editor = db.Editor.Find(id);
-            if (editor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(editor);
-        }
-
-        // POST: Editors/Delete/5
-        [HttpPost, ActionName("DeleteRedaktor")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Editor editor = db.Editor.Find(id);
-            db.Editor.Remove(editor);
+            Users question = db.Users.Find(id);
+            int? presId = question.user_id;
+            db.Users.Remove(question);
             db.SaveChanges();
             return RedirectToAction("Requests");
         }
+
+        //// POST: Editors/Delete/5
+        //[HttpPost, ActionName("DeleteRedaktor")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Users editor = db.Users.Find(id);
+        //    db.Users.Remove(editor);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Requests");
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

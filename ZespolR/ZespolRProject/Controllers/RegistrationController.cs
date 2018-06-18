@@ -68,11 +68,11 @@ namespace ZespolRProject.Controllers
                 var v = dc.Users.Where(a => a.email == login.Email).FirstOrDefault();
                 if (v != null)
                 {
-                //    if (!v.IsEmailVeryfied)
-                //    {
-                //        ViewBag.Message = "Zweryfikuj najpierw swoj email";
-                //        return View();
-                //    }
+                    if (v.isActivated!=true && v.isEditor==true)
+                    {
+                        ViewBag.Message = "Wait for Admin to accept your request";
+                        return View();
+                    }
                     if (string.Compare(login.Password, v.password) == 0)
                     {
 
@@ -98,12 +98,12 @@ namespace ZespolRProject.Controllers
                     }
                     else
                     {
-                        message = "Zle haslo";
+                        message = "Wrong password";
                     }
                 }
                 else
                 {
-                    message = "Zla nazwa uzytkownika";
+                    message = "Wrong email";
                 }
             }
             ViewBag.Message = message;

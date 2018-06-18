@@ -31,9 +31,16 @@ namespace ZespolRProject.Controllers
             {
                 return RedirectToAction("Index", "Moderator");
             }
-            else if (c.isEditor == true)
+            else if (c.isEditor ==true)
             {
-                return RedirectToAction("MyTests", "Redaktor");
+                if(c.isActivated == true)
+                {
+                 return RedirectToAction("MyTests", "Redaktor");
+                }
+                else
+                {
+                 return RedirectToAction("Login", "Registration");
+                }
             }
             else
                 return RedirectToAction("Candidate1", "Kandydat");

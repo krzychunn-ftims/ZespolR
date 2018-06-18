@@ -10,116 +10,116 @@ using ZespolRProject.Models;
 
 namespace ZespolRProject.Controllers
 {
-    public class QuestionController : Controller
+    public class TestsController : Controller
     {
         private ZespolREntities db = new ZespolREntities();
 
-        // GET: Question
+        // GET: Tests
         public ActionResult Index()
         {
-            var question = db.Question.Include(q => q.QuestionType).Include(q => q.TestVersion);
-            return View(question.ToList());
+            var test = db.Test.Include(t => t.Editor).Include(t => t.Position);
+            return View(test.ToList());
         }
 
-        // GET: Question/Details/5
+        // GET: Tests/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Question.Find(id);
-            if (question == null)
+            Test test = db.Test.Find(id);
+            if (test == null)
             {
                 return HttpNotFound();
             }
-            return View(question);
+            return View(test);
         }
 
-        // GET: Question/Create
+        // GET: Tests/Create
         public ActionResult Create()
         {
-            ViewBag.q_qt = new SelectList(db.QuestionType, "qt_id", "qt_name");
-            ViewBag.q_tv = new SelectList(db.TestVersion, "tv_id", "tv_id");
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name");
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name");
             return View();
         }
 
-        // POST: Question/Create
+        // POST: Tests/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "q_id,q_head,q_body,q_qt,q_is_neg,q_max_score,q_tv,q_answer,q_comment")] Question question)
+        public ActionResult Create([Bind(Include = "t_id,t_name,t_desc,t_po,t_def_lng,t_ed,t_start,t_end,t_is_published,t_tt_limit,t_pass_limit,t_time_limit")] Test test)
         {
             if (ModelState.IsValid)
             {
-                db.Question.Add(question);
+                db.Test.Add(test);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.q_qt = new SelectList(db.QuestionType, "qt_id", "qt_name", question.q_qt);
-            ViewBag.q_tv = new SelectList(db.TestVersion, "tv_id", "tv_id", question.q_tv);
-            return View(question);
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name", test.t_ed);
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name", test.t_po);
+            return View(test);
         }
 
-        // GET: Question/Edit/5
+        // GET: Tests/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Question.Find(id);
-            if (question == null)
+            Test test = db.Test.Find(id);
+            if (test == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.q_qt = new SelectList(db.QuestionType, "qt_id", "qt_name", question.q_qt);
-            ViewBag.q_tv = new SelectList(db.TestVersion, "tv_id", "tv_id", question.q_tv);
-            return View(question);
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name", test.t_ed);
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name", test.t_po);
+            return View(test);
         }
 
-        // POST: Question/Edit/5
+        // POST: Tests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "q_id,q_head,q_body,q_qt,q_is_neg,q_max_score,q_tv,q_answer,q_comment")] Question question)
+        public ActionResult Edit([Bind(Include = "t_id,t_name,t_desc,t_po,t_def_lng,t_ed,t_start,t_end,t_is_published,t_tt_limit,t_pass_limit,t_time_limit")] Test test)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(question).State = EntityState.Modified;
+                db.Entry(test).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.q_qt = new SelectList(db.QuestionType, "qt_id", "qt_name", question.q_qt);
-            ViewBag.q_tv = new SelectList(db.TestVersion, "tv_id", "tv_id", question.q_tv);
-            return View(question);
+            ViewBag.t_ed = new SelectList(db.Editor, "ed_id", "ed_name", test.t_ed);
+            ViewBag.t_po = new SelectList(db.Position, "po_id", "po_name", test.t_po);
+            return View(test);
         }
 
-        // GET: Question/Delete/5
+        // GET: Tests/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Question.Find(id);
-            if (question == null)
+            Test test = db.Test.Find(id);
+            if (test == null)
             {
                 return HttpNotFound();
             }
-            return View(question);
+            return View(test);
         }
 
-        // POST: Question/Delete/5
+        // POST: Tests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteQuestion(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Question question = db.Question.Find(id);
-            db.Question.Remove(question);
+            Test test = db.Test.Find(id);
+            db.Test.Remove(test);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

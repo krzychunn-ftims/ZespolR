@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ZespolRProject.Models.Editor>
+﻿@model IEnumerable<ZespolRProject.Models.Users>
 
 @{
     ViewBag.Title = "Managing requests";
@@ -73,7 +73,7 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
 <div class="jumbotron">
 
     <div class="col-md-4">
-        <p><a href="~/Moderator/Index" class="btn btn-primary btn-lg btn-block">Managing redactors</a></p>
+        <p><a href="~/Moderator/Index" class="btn btn-primary btn-lg btn-block">Managing tests</a></p>
     </div>
 
     <div class="col-md-4">
@@ -98,25 +98,7 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                     <thead>
                         <tr>
                             <th>
-                                Test ID
-                            </th>
-                            <th>
-                                Test name
-                            </th>
-                            <th>
-                                Test desk
-                            </th>
-                            <th>
-                                Redaktor Phone
-                            </th>
-                            <th>
-                                Redaktor default language
-                            </th>
-                            <th>
-                                Redaktor password
-                            </th>
-                            <th>
-                                Redaktord mod
+                                Redactor email
                             </th>
                             <th>
                                 Redaktor status
@@ -127,35 +109,19 @@ body { background-image: url("http://365psd.ru/images/backgrounds/bg-lightl-889.
                         @foreach (var item in Model)
             {
                 <tr>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.ed_id)
+                        @Html.DisplayFor(modelItem => item.email)
                     </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.ed_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_surname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_def_lng)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_password)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_mod)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ed_isActive)
+                        @Html.DisplayFor(modelItem => item.isActivated)
                     </td>
                     <td>
                         <ul class="nav nav-pills nav-stacked">
 
-                            @Html.ActionLink("Edit", "EditRedaktor", new { id = item.ed_id });
-                            @Html.ActionLink("Delete", "DeleteRedaktor", new { id = item.ed_id })
+                            @Html.ActionLink("Edit", "EditRedaktor", new { id = item.user_id });
+                            @Html.ActionLink("Delete", "DeleteRedaktor", new { id = item.user_id })
                         </ul>
 
                     </td>

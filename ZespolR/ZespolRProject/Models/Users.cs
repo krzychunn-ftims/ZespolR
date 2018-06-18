@@ -11,14 +11,14 @@ namespace ZespolRProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Users
     {
         public int user_id { get; set; }
         public string email { get; set; }
-        [DataType(DataType.Password)]
         public string password { get; set; }
         public Nullable<bool> isAdmin { get; set; }
         public Nullable<bool> isEditor { get; set; }
+        public Nullable<bool> isActivated { get; set; }
     }
 }

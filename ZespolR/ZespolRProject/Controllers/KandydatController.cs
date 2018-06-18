@@ -73,19 +73,6 @@ namespace ZespolRProject.Controllers
             return View(c);
         }
 
-        //public ActionResult TestTake(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Question question = db.Question.Find(id);
-        //    if (question == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(question);
-        //}
         public ActionResult TestTake(int? id)
         {
             var question = db.Question.Include(q => q.QuestionType).Include(q => q.TestVersion).Where(x=>x.q_tv==id);
