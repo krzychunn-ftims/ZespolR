@@ -2,14 +2,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Witaj</h2>
 
-Witaj @HttpContext.Current.User.Identity.Name
+<div>Welcome to the recruit portal.</div>
+<br />
+<div>You can @Html.ActionLink("Login", "Login", "Registration") if you already have an account  </div>
+<div>or @Html.ActionLink("Register", "Registration", "Registration") if you are new user </div>
 
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("Logout", "Registration", FormMethod.Post, new { id = "logoutForm" }))
-    {
-        <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj sie</a>
-    }
-}

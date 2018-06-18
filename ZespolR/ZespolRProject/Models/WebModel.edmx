@@ -168,6 +168,16 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <Property Name="_a" Type="int" />
           <Property Name="_time" Type="datetime" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="isAdmin" Type="bit" />
+          <Property Name="isEditor" Type="bit" />
+        </EntityType>
         <Association Name="FK_Editor_Moderator">
           <End Role="Moderator" Type="Self.Moderator" Multiplicity="0..1" />
           <End Role="Editor" Type="Self.Editor" Multiplicity="*" />
@@ -251,6 +261,7 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
           <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestVersion" EntityType="Self.TestVersion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidate" EntityType="Self.Candidate" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Candidate].[ca_id] AS [ca_id], 
@@ -604,6 +615,7 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             <End Role="Position" EntitySet="Position" />
             <End Role="Position1" EntitySet="Position" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="WebModel.Users" />
         </EntityContainer>
         <Association Name="FK_Question_Test">
           <End Type="WebModel.Test" Role="Test" Multiplicity="0..1" />
@@ -641,6 +653,16 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="isEditor" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -807,6 +829,17 @@ warning 6002: The table/view 'zespolr.dbo.tt_a_assoc' does not have a primary ke
                 <ScalarProperty Name="a_ques" ColumnName="a_ques" />
                 <ScalarProperty Name="a_test" ColumnName="a_test" />
                 <ScalarProperty Name="a_id" ColumnName="a_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WebModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="isEditor" ColumnName="isEditor" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

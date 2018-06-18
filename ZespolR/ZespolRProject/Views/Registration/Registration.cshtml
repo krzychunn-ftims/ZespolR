@@ -1,89 +1,59 @@
-﻿@model ZespolRProject.Models.Moderator
+﻿@model ZespolRProject.Models.Users
 
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "Create";
 }
 
-<h2>Rejestracja</h2>
+<h2>Register</h2>
 
-@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+@using (Html.BeginForm())
 {
-    if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success">
-            <strong>Udalo sie!</strong>@ViewBag.Message
-        </div>
-    }
-}
-else
-{
-
-    using (Html.BeginForm())
-    {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @*<div class="form-group">
-                    @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
-
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.mod_name, "Nazwa użytkownika", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.mod_name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.mod_name, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.mod_password, "Hasło", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.mod_password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.mod_password, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            @*<div class="form-group">
-                    @Html.LabelFor(model => model.IsEmailVeryfied, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.IsEmailVeryfied, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.IsEmailVeryfied, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Account for editor?", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.isEditor)
+                        @Html.ValidationMessageFor(model => model.isEditor, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ActivationCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ActivationCode, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ActivationCode, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Zarejestruj" class="btn btn-default" />
+                    <input type="submit" value="Register" class="btn btn-default" />
                 </div>
             </div>
         </div>
-        if (ViewBag.Message != null)
-        {
-            <div class="alert alert-danger">
-                <strong>Error!</strong>@ViewBag.Message
-            </div>
-        }
+
     }
-}
-@*<div>
-        @Html.ActionLink("Logowanie", "Index")
-    </div>*@
+
+<div>
+        @Html.ActionLink("Log in", "Index")
+    </div>
 
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>

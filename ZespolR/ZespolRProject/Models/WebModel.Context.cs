@@ -39,5 +39,6 @@ namespace ZespolRProject.Models
         public virtual DbSet<TestTakeStatus> TestTakeStatus { get; set; }
         public virtual DbSet<tt_a_assoc> tt_a_assoc { get; set; }
         public virtual DbSet<Answ> Answ { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

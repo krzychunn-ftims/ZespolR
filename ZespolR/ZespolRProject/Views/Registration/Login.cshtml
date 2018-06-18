@@ -1,9 +1,9 @@
-﻿@model ZespolRProject.Models.Moderator
+﻿@model ZespolRProject.Models.UserLogin
 
 @{
     ViewBag.Title = "Login";
 }
-<h2>Logowanie</h2>
+<h2>Log in</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,18 +18,18 @@
         }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.mod_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.mod_name, "Adres Email", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mod_name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Email, "Adres Email", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.mod_password, "Hasło", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Password", "Password", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.mod_password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mod_password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -45,14 +45,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zaloguj" class="btn btn-default" />
+                <input type="submit" value="Log in" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Zarejestruj teraz", "Registration", "Registration")
+    @Html.ActionLink("Register now", "Registration", "Registration")
 </div>
 
 

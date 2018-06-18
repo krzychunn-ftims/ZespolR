@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Logged";
+}
+
+
+
+<h2>Welcome</h2>
+<div>welcome @HttpContext.Current.User.Identity.Name</div>
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Registration", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}

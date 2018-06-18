@@ -27,6 +27,7 @@
         <AssociationConnector Association="WebModel.FK_Question_Test" />
         <EntityTypeShape EntityType="WebModel.Answ" Width="1.5" PointX="0.75" PointY="11.75" />
         <AssociationConnector Association="WebModel.FK_Position_Position" />
+        <EntityTypeShape EntityType="WebModel.Users" Width="1.5" PointX="3.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
